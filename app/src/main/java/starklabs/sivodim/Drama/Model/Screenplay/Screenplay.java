@@ -1,0 +1,14 @@
+package starklabs.sivodim.Drama.Model.Screenplay;
+
+import starklabs.sivodim.Drama.Model.Chapter.Chapter;
+import starklabs.sivodim.Drama.Model.Character.Character;
+
+/**
+ * Created by io on 25/05/2016.
+ */
+public interface Screenplay {
+    void export();
+    void share();
+    void addChapter(Chapter chapter);
+    void addCharacter(Character character);
+}
