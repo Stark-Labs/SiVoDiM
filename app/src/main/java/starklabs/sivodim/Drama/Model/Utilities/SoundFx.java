@@ -6,11 +6,14 @@ import java.io.File;
  * Created by io on 25/05/2016.
  */
 public class SoundFx extends Sound {
-
-    private File file;
+    private static final long maxSize=15728640L;
 
     public SoundFx(String path){
         super(path);
-        file=new File(path);//da verificare!
+    }
+
+    @Override
+    protected long maxSize() {
+        return maxSize;
     }
 }

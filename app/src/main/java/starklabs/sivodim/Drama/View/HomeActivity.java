@@ -1,8 +1,10 @@
 package starklabs.sivodim.Drama.View;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +14,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
+
+import starklabs.sivodim.Drama.Model.Utilities.Avatar;
+import starklabs.sivodim.Drama.Model.Utilities.Image;
+import starklabs.sivodim.Drama.Model.Utilities.Sound;
+import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 import starklabs.sivodim.R;
 
 public class HomeActivity extends AppCompatActivity
@@ -42,6 +53,43 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        //------test------------------------------------------------------
+        // remember to delete imageView2 in the content_home.xml file while removing this test
+        File file=getFilesDir();
+        File pic=new File(file,"anger.png");
+        Image image=new Avatar(pic.getAbsolutePath());
+        ImageView myImage = (ImageView) findViewById(R.id.imageView2);
+        if (myImage != null && image.isDefined()) {
+            myImage.setImageBitmap(image.getImage());
+            Toast.makeText(this,"Immagine definita",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this,"Immagine NON definita",Toast.LENGTH_LONG).show();
+        }
+        Sound speech=new SpeechSound(new File(file,"prova.wav").getAbsolutePath());
+        speech.play();
+        //---------------test-end--------------------------------------------------------
+
+    }
+
+    public File getAlbumStorageDir(String albumName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), albumName);
+        file.mkdirs();
+        return file;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

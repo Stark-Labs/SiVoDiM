@@ -13,4 +13,9 @@ public class Avatar extends Image {
     public Avatar(String path){
         super(path);
     }
+
+    @Override
+    protected long maxSize() {
+        return maxSize;
+    }
 }
