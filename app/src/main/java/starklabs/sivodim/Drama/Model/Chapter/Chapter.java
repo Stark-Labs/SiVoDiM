@@ -11,7 +11,6 @@ import starklabs.sivodim.Drama.Model.Utilities.Soundtrack;
  * Created by Francesco Bizzaro on 25/05/2016.
  */
 public interface Chapter {
-    // jandsguipuàha
     ListIterator<Speech> getSpeechIterator();
     void addSpeech(Speech speech);//push_back
     void deleteSpeech(ListIterator<Speech> iterator);
