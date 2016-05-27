@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SiVoDiM.iml" filepath="$PROJECT_DIR$/SiVoDiM.iml" />
       <module fileurl="file://$PROJECT_DIR$/SiVoDiM7.iml" filepath="$PROJECT_DIR$/SiVoDiM7.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Sivodim.iml" filepath="$PROJECT_DIR$/Sivodim.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
