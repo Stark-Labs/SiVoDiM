@@ -11,5 +11,7 @@ public class NewCharacterActivity extends AppCompatActivity implements NewCharac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_character);
+
+        getSupportActionBar().setTitle("Creazione personaggio");
     }
 }

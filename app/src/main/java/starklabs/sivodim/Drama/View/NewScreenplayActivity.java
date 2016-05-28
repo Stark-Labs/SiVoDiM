@@ -11,5 +11,7 @@ public class NewScreenplayActivity extends AppCompatActivity implements NewScree
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_screenplay);
+
+        getSupportActionBar().setTitle("Creazione progetto");
     }
 }
