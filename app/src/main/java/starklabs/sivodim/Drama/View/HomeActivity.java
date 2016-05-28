@@ -18,12 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 
-import starklabs.sivodim.Drama.Model.Utilities.Avatar;
-import starklabs.sivodim.Drama.Model.Utilities.Image;
-import starklabs.sivodim.Drama.Model.Utilities.Sound;
-import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
+import java.io.File;
+import java.util.Vector;
+
+import starklabs.sivodim.Drama.Model.Screenplay.AudioConcatenator;
+import starklabs.sivodim.Drama.Model.Screenplay.AudioMixer;
+import starklabs.sivodim.Drama.Model.Screenplay.Mp3Converter;
 import starklabs.sivodim.R;
 
 public class HomeActivity extends AppCompatActivity
@@ -55,21 +57,20 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+
         //------test------------------------------------------------------
-        // remember to delete imageView2 in the content_home.xml file while removing this test
-        File file=getFilesDir();
-        File pic=new File(file,"anger.png");
-        Image image=new Avatar(pic.getAbsolutePath());
-        ImageView myImage = (ImageView) findViewById(R.id.imageView2);
-        if (myImage != null && image.isDefined()) {
-            myImage.setImageBitmap(image.getImage());
-            Toast.makeText(this,"Immagine definita",Toast.LENGTH_LONG).show();
-        }
-        else {
-            Toast.makeText(this,"Immagine NON definita",Toast.LENGTH_LONG).show();
-        }
-        Sound speech=new SpeechSound(new File(file,"prova.wav").getAbsolutePath());
-        speech.play();
+        File file=new File(getFilesDir(),"Airbag.mp3");
+        File file2=new File(getFilesDir(),"concatenation.wav");
+        File dest=new File(getFilesDir(),"mergedAudio.wav");
+        AudioMixer am=new AudioMixer(this,file2,file,dest);
+        try {
+            boolean success=am.exec();
+            String mex="sconfitta";
+            if(success)mex="Yee";
+            Toast.makeText(this,mex,Toast.LENGTH_LONG).show();
+        } catch (FFmpegCommandAlreadyRunningException e) {
+            e.printStackTrace();
+        } ;
         //---------------test-end--------------------------------------------------------
 
     }

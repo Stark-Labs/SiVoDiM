@@ -22,6 +22,12 @@ public abstract class Sound {
         return audio;
     }
 
+    public void pause(){
+        if(mediaPlayer!=null){
+            mediaPlayer.pause();
+        }
+    }
+
     public void stop(){
         if(mediaPlayer!=null){
             mediaPlayer.stop();

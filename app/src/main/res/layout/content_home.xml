@@ -12,20 +12,16 @@
     tools:context=".Drama.View.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView4" />
-
-    <ImageView
+    <ListView
+        android:id="@+id/screenplayList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp" />
+        android:layout_weight="1"
+        android:background="@null"
+        android:divider="@null"
+        android:dividerHeight="8dp"
+        android:stackFromBottom="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:transcriptMode="alwaysScroll"/>
 </RelativeLayout>
