@@ -45,12 +45,26 @@ public abstract class FfmpegConnector {
         }
     }
 
-    public FfmpegStatus exec() throws FFmpegCommandAlreadyRunningException {
+    public void exec() throws FFmpegCommandAlreadyRunningException {
         String cmd=getCommand();
         FfmpegStatus response=new FfmpegStatus();
         ffmpeg.execute(cmd.split(" "),response);
-        while (ffmpeg.isFFmpegCommandRunning()){System.out.println("WOOOOOOOOOOOOORK");}
-        return response;
+        while (!ffmpeg.isFFmpegCommandRunning()){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println("NOT WOOOOOOOOOOOOORK");
+        }
+        while (ffmpeg.isFFmpegCommandRunning()){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println("WOOOOOOOOOOOOORK");
+        }
     }
 
     public abstract String getCommand();

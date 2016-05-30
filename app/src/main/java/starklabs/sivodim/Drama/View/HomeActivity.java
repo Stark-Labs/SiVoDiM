@@ -33,6 +33,7 @@ import starklabs.sivodim.Drama.Model.Screenplay.FfmpegStatus;
 import starklabs.sivodim.Drama.Model.Screenplay.Mp3Converter;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.Model.Utilities.Soundtrack;
+import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 import starklabs.sivodim.R;
 
 import static android.os.Environment.getExternalStorageDirectory;
@@ -72,38 +73,35 @@ public class HomeActivity extends AppCompatActivity
         assert button != null;
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-                boolean success=false;
-                Thread t=new Thread(new Runnable() {
-                    @Override
-                    public void run() {
                         File f=new File(getExternalStorageDirectory(),"pic004.png");
                         System.out.println(f.getAbsolutePath());
                         File file=new File(getFilesDir(),"Airbag.mp3");
                         File file2=new File(getFilesDir(),"concatenation.wav");
-                        File dest=new File(getFilesDir(),"mergedAudio.wav");
-                        AudioMixer am=new AudioMixer(v.getContext(),file2,file,dest);
+                        File dest=new File(getFilesDir(),"parzial.wav");
+                File dest2=new File(getFilesDir(),"mergedAudio.wav");
+                        AudioConcatenator am=new AudioConcatenator(v.getContext(),dest);
+                        am.addFile(file2);
+                        am.addFile(file2);
+                        AudioMixer aam=new AudioMixer(v.getContext(),dest,file,dest2);
+                File dest3=new File(getFilesDir(),"export.mp3");
+                Mp3Converter mp=new Mp3Converter(v.getContext(),dest2,dest3);
                         try {
-                            FfmpegStatus status=am.exec();
-                            //while (!status.finish()){System.out.println("noFinito");}
+                            am.exec();
+                            aam.exec();
+                            mp.exec();
                         } catch (FFmpegCommandAlreadyRunningException e) {
                             e.printStackTrace();
                         }
-                    }
-                });
-                t.start();
 
+                SpeechSound soundtrack=new SpeechSound(dest3.getAbsolutePath());
+                 soundtrack.play();
                 //for(int i=0;i<100000;i++){System.out.println(t.isAlive());}
                 System.out.println("---qui-main---------");
-                String mex="Non funziona";
-                if(success)mex="Funziona";
+                String mex="Finito";
                 Toast.makeText(v.getContext(),mex,Toast.LENGTH_LONG).show();
             }
         });
 
-
-
-        //Soundtrack soundtrack=new Soundtrack(dest.getAbsolutePath());
-       // soundtrack.play();
         //---------------test-end--------------------------------------------------------
 
     }

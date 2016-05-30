@@ -1,6 +1,7 @@
 package starklabs.sivodim.Drama.Model.Screenplay;
 
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 
 import java.io.File;
 
@@ -9,12 +10,12 @@ import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 /**
  * Created by io on 30/05/2016.
  */
-public class FfmpegStatus extends ExecuteBinaryResponseHandler {
+public class FfmpegStatus implements FFmpegExecuteResponseHandler {
     private Boolean status;
     private Boolean end=new Boolean(false);
 
     public FfmpegStatus(){
-        this.status=new Boolean(true);
+        this.status=new Boolean(false);
     }
 
     public boolean getStatus(){
@@ -44,7 +45,7 @@ public class FfmpegStatus extends ExecuteBinaryResponseHandler {
 
     @Override
     public void onSuccess(String message) {
-
+        this.status=true;
         System.out.println("SUCCESSO");
     }
 
@@ -52,9 +53,6 @@ public class FfmpegStatus extends ExecuteBinaryResponseHandler {
     public void onFinish() {
         this.end=true;
         System.out.println("FINITO");
-        File file=new File("/data/user/0/starklabs.sivodim/files/mergedAudio.wav");
-        SpeechSound soundtrack=new SpeechSound(file.getAbsolutePath());
-        soundtrack.play();
     }
 
 }
