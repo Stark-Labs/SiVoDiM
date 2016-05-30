@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 import java.io.File;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Francesco Bizzaro on 25/05/2016.
  */
 public abstract class Sound {
     private String path;

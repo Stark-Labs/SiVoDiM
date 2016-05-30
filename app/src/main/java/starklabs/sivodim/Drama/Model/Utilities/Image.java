@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import java.io.File;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Francesco Bizzaro on 25/05/2016.
  */
 public abstract class Image {
     private String path;
