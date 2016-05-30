@@ -16,9 +16,9 @@ public interface Chapter {
     void addSpeech(Speech speech);//push_back
     void deleteSpeech(ListIterator<Speech> iterator);
     void moveSpeech(ListIterator<Speech> iterator);
-    void editTitle(String title);
-    void editBackground(Background background);
-    void editSoundtrack(Soundtrack soundtrack);
+    void setTitle(String title);
+    void setBackground(Background background);
+    void setSoundtrack(Soundtrack soundtrack);
     void deleteBackground();
     void deleteSoundtrack();
 

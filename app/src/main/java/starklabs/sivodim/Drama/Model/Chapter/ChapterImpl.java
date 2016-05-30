@@ -100,17 +100,17 @@ public class ChapterImpl implements Chapter{
     // setter methods: edit existing parameters or set new values (title, background, soundtrack)
     @Override
     public void setTitle(String title) {
-
+        this.title = title;
     }
 
     @Override
     public void setBackground(Background background) {
-
+        this.background = background;
     }
 
     @Override
     public void setSoundtrack(Soundtrack soundtrack) {
-
+        this.soundtrack = soundtrack;
     }
 
     // delete methods: delete existing parameters (speech, background, soundtrack)
