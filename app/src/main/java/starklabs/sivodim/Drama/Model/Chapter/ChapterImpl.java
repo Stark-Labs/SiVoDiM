@@ -56,7 +56,7 @@ public class ChapterImpl implements Chapter{
         }
 
         // return chapter built by builder
-        public Chapter build() {
+        public ChapterImpl build() {
             if(titleB!=null) {
                 return new ChapterImpl(this);
             }

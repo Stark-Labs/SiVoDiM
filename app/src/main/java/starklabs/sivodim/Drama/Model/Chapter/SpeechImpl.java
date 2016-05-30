@@ -8,32 +8,62 @@ import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
  * Created by Riccardo Rizzo on 25/05/2016.
  */
 public class SpeechImpl implements Speech {
-    private static String synthesistPath;
     private String text;
     private String emotionID;
     private Character character;
     private SoundFx soundFx;
+    private static String synthesistPath;
 
-    public SpeechImpl(String text, Character character, String emotionID, SoundFx soundFx) {
-        setText(text);
-        setEmotion(emotionID);
-        setCharacter(character);
-        setSoundFx(soundFx);
+    public static class SpeechBuilder {
+        // required parameters
+        private String textB;
+
+        // optional parameters
+        private String emotionIDB;
+        private Character characterB;
+        private SoundFx soundFxB;
+
+        // setter
+        public SpeechBuilder setText(String text) {
+            this.textB = text;
+            return this;
+        }
+
+        public SpeechBuilder setEmotion(String emotionID) {
+            this.emotionIDB = emotionID;
+            return this;
+        }
+
+        public SpeechBuilder setCharacter(Character character) {
+            this.characterB = character;
+            return this;
+        }
+
+        public SpeechBuilder setSoundFX(SoundFx soundFx) {
+            this.soundFxB = soundFx;
+            return this;
+        }
+
+        // return speech built by builder
+        public SpeechImpl build() {
+            if(textB!=null) {
+                return new SpeechImpl(this);
+            }
+            return null;
+        }
     }
 
-    public SpeechImpl(String text, Character character) {
-        this(text, character, null, null);
+    private SpeechImpl(SpeechBuilder builder) {
+        // required parameters
+        text = builder.textB;
+
+        // optional parameters
+        emotionID = builder.emotionIDB;
+        character = builder.characterB;
+        soundFx = builder.soundFxB;
     }
 
-    public SpeechImpl(String text, Character character, String emotionID) {
-        this(text, character, emotionID, null);
-    }
-
-    public SpeechImpl(String text, Character character, SoundFx soundFx) {
-        this(text, character, null, soundFx);
-    }
-
-    // setter
+    // setter methods: edit existing parameters or set new values (text, emotionID, character, soundFx)
     @Override
     public void setText(String text) {
         this.text = text;
