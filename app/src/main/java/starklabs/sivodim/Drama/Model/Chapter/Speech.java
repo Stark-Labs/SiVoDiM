@@ -7,7 +7,7 @@ import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Utilities.SoundFx;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Riccardo Rizzo on 25/05/2016.
  */
 public interface Speech {
     // setter

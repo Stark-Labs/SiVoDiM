@@ -5,7 +5,7 @@ import starklabs.sivodim.Drama.Model.Utilities.SoundFx;
 import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Riccardo Rizzo on 25/05/2016.
  */
 public class SpeechImpl implements Speech {
     private static String synthesistPath;
