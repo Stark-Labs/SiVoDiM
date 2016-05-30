@@ -24,4 +24,21 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="40dp"
         android:transcriptMode="alwaysScroll"/>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/buttonProva"
+        android:layout_alignTop="@+id/screenplayList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="180dp" />
 </RelativeLayout>

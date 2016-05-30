@@ -8,7 +8,11 @@ import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
+import java.io.File;
 import java.util.concurrent.ThreadPoolExecutor;
+
+import starklabs.sivodim.Drama.Model.Utilities.Soundtrack;
+import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 
 /**
  * Created by io on 28/05/2016.
@@ -16,6 +20,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public abstract class FfmpegConnector {
     private FFmpeg ffmpeg;
     private Context context;
+    private Object lock=new Object();
 
     public FfmpegConnector(Context context){
         this.context=context;
@@ -40,57 +45,13 @@ public abstract class FfmpegConnector {
         }
     }
 
-    public boolean exec() throws FFmpegCommandAlreadyRunningException {
+    public FfmpegStatus exec() throws FFmpegCommandAlreadyRunningException {
         String cmd=getCommand();
-        boolean success=false;
-        FfmpegResponse response=new FfmpegResponse();
+        FfmpegStatus response=new FfmpegStatus();
         ffmpeg.execute(cmd.split(" "),response);
-        //while (!response.finish()){}
-        return response.getStatus();
+        while (ffmpeg.isFFmpegCommandRunning()){System.out.println("WOOOOOOOOOOOOORK");}
+        return response;
     }
 
     public abstract String getCommand();
-
-    private class FfmpegResponse extends ExecuteBinaryResponseHandler{
-        private boolean status=false;
-        private boolean end=false;
-
-        public boolean getStatus(){
-            return status;
-        }
-
-        public boolean finish(){
-            return end;
-        }
-
-        @Override
-        public void onStart() {
-            System.out.println("INIZIATO");
-        }
-
-        @Override
-        public void onProgress(String message) {
-            System.out.println(message);
-            System.out.println("PROGGRESSO");
-        }
-
-        @Override
-        public void onFailure(String message) {
-            System.out.println(message);
-            System.out.println("FALLITO");
-            status=false;
-        }
-
-        @Override
-        public void onSuccess(String message) {
-            System.out.println("SUCCESSO");
-            status=true;
-        }
-
-        @Override
-        public void onFinish() {
-            System.out.println("FINITO");
-            end=true;
-        }
-    }
 }

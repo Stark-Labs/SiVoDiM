@@ -1,5 +1,8 @@
 package starklabs.sivodim.Drama.View;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +29,13 @@ import java.util.Vector;
 
 import starklabs.sivodim.Drama.Model.Screenplay.AudioConcatenator;
 import starklabs.sivodim.Drama.Model.Screenplay.AudioMixer;
+import starklabs.sivodim.Drama.Model.Screenplay.FfmpegStatus;
 import starklabs.sivodim.Drama.Model.Screenplay.Mp3Converter;
+import starklabs.sivodim.Drama.Model.Utilities.Avatar;
+import starklabs.sivodim.Drama.Model.Utilities.Soundtrack;
 import starklabs.sivodim.R;
+
+import static android.os.Environment.getExternalStorageDirectory;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,HomeInterface {
@@ -59,18 +68,42 @@ public class HomeActivity extends AppCompatActivity
 
 
         //------test------------------------------------------------------
-        File file=new File(getFilesDir(),"Airbag.mp3");
-        File file2=new File(getFilesDir(),"concatenation.wav");
-        File dest=new File(getFilesDir(),"mergedAudio.wav");
-        AudioMixer am=new AudioMixer(this,file2,file,dest);
-        try {
-            boolean success=am.exec();
-            String mex="sconfitta";
-            if(success)mex="Yee";
-            Toast.makeText(this,mex,Toast.LENGTH_LONG).show();
-        } catch (FFmpegCommandAlreadyRunningException e) {
-            e.printStackTrace();
-        } ;
+        Button button = (Button) findViewById(R.id.buttonProva);
+        assert button != null;
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                boolean success=false;
+                Thread t=new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        File f=new File(getExternalStorageDirectory(),"pic004.png");
+                        System.out.println(f.getAbsolutePath());
+                        File file=new File(getFilesDir(),"Airbag.mp3");
+                        File file2=new File(getFilesDir(),"concatenation.wav");
+                        File dest=new File(getFilesDir(),"mergedAudio.wav");
+                        AudioMixer am=new AudioMixer(v.getContext(),file2,file,dest);
+                        try {
+                            FfmpegStatus status=am.exec();
+                            //while (!status.finish()){System.out.println("noFinito");}
+                        } catch (FFmpegCommandAlreadyRunningException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                t.start();
+
+                //for(int i=0;i<100000;i++){System.out.println(t.isAlive());}
+                System.out.println("---qui-main---------");
+                String mex="Non funziona";
+                if(success)mex="Funziona";
+                Toast.makeText(v.getContext(),mex,Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+        //Soundtrack soundtrack=new Soundtrack(dest.getAbsolutePath());
+       // soundtrack.play();
         //---------------test-end--------------------------------------------------------
 
     }

@@ -11,4 +11,5 @@ public interface Screenplay {
     void share();
     void addChapter(Chapter chapter);
     void addCharacter(Character character);
+    void removeCharacter(Character character);
 }

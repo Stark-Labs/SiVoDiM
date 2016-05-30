@@ -1,5 +1,7 @@
 package starklabs.sivodim.Drama.Model.Chapter;
 
+import java.io.File;
+
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Utilities.SoundFx;
 import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
@@ -11,21 +13,23 @@ public class SpeechImpl implements Speech {
     private static String synthesistPath;
     private String emotionID;
     private Character character;
+    private String text;
     private SoundFx soundFx;
+    private String id;
 
     @Override
-    public void setText() {
-
+    public void setText(String text) {
+        this.text=text;
     }
 
     @Override
     public String getText() {
-        return null;
+        return text;
     }
 
     @Override
-    public void setEmotion() {
-
+    public void setEmotion(String emotion) {
+        this.emotionID=emotion;
     }
 
     @Override
@@ -34,21 +38,32 @@ public class SpeechImpl implements Speech {
     }
 
     @Override
-    public void setCharacter() {
-
+    public void setCharacter(Character character) {
+        this.character=character;
     }
 
     @Override
-    public String toRequest() {
+    public SpeechSound getSound(){
+        File file=new File(synthesistPath,id);
+        if(file.exists())return new SpeechSound(file.getAbsolutePath());
         return null;
     }
 
-    //Class for speech audio preview
+
+    /*/Class for speech audio preview
     public class PlaySpeech{
 
         private SpeechSound synthesis;
 
-    }
+        public PlaySpeech(SpeechSound speechSound){
+            synthesis=speechSound;
+        }
+
+        public void play(){
+            synthesis.play();
+        }
+
+    }*/
 
 
 }
