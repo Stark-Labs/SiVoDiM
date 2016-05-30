@@ -13,4 +13,9 @@ public class Background extends Image {
     public Background(String path){
         super(path);
     }
+
+    @Override
+    protected long maxSize() {
+        return maxSize;
+    }
 }
