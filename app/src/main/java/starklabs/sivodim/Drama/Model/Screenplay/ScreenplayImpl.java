@@ -11,12 +11,14 @@ import starklabs.sivodim.Drama.Model.Character.Character;
  * Created by io on 25/05/2016.
  */
 public class ScreenplayImpl implements Screenplay {
-    CharacterContainer characterContainer;
-    ArrayList<Chapter> chapters=new ArrayList<>();
-    ExportAlgorithm exportAlgorithm;
-    ShareAlgorithm shareAlgorithm;
+    private String title;
+    private CharacterContainer characterContainer;
+    private ArrayList<Chapter> chapters=new ArrayList<>();
+    private ExportAlgorithm exportAlgorithm;
+    private ShareAlgorithm shareAlgorithm;
 
-    public ScreenplayImpl(){
+    public ScreenplayImpl(String title){
+        this.title = title;
         characterContainer=new CharacterContainer();
     }
 

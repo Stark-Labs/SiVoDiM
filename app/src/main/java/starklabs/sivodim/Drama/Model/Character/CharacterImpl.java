@@ -3,7 +3,7 @@ package starklabs.sivodim.Drama.Model.Character;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Riccardo Rizzo on 25/05/2016.
  */
 public class CharacterImpl implements Character {
     private String name;

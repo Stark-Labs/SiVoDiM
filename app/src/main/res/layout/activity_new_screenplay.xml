@@ -21,24 +21,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome progetto:"
-            android:id="@+id/textView4" />
+            android:id="@+id/textViewProjectName" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2" />
+            android:id="@+id/editTextProjectName" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Importa personaggi da:"
-            android:id="@+id/textView5"
+            android:id="@+id/textViewImportCharacters"
             android:paddingTop="16dp" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerImportCharacters"
             android:layout_gravity="center_horizontal"
             android:spinnerMode="dropdown"
             android:paddingBottom="5dp" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Crea progetto"
-            android:id="@+id/button"
+            android:id="@+id/buttonCreateProject"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </RelativeLayout>
