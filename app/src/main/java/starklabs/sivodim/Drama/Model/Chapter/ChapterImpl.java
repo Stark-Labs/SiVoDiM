@@ -18,7 +18,7 @@ public class ChapterImpl implements Chapter{
     private SoundFx soundFx;
     private List<Speech> speeches=null;
 
-    public static class Builder {
+    public static class ChapterBuilder {
         // required parameters
         private String titleB;
 
@@ -29,28 +29,28 @@ public class ChapterImpl implements Chapter{
         private ArrayList<Speech> speechesB= new ArrayList<>();
 
         // setter
-        public Builder setTitle(String title) {
+        public ChapterBuilder setTitle(String title) {
             this.titleB = title;
             return this;
         }
 
-        public Builder setBackground(Background background) {
+        public ChapterBuilder setBackground(Background background) {
             this.backgroundB = background;
             return this;
         }
 
-        public Builder setSoundTrack(Soundtrack soundtrack) {
+        public ChapterBuilder setSoundtrack(Soundtrack soundtrack) {
             this.soundtrackB = soundtrack;
             return this;
         }
 
-        public Builder setSoundFx(SoundFx soundFx) {
+        public ChapterBuilder setSoundFx(SoundFx soundFx) {
             this.soundFxB = soundFx;
             return this;
         }
 
         // load speeches from sdcard
-        public Builder loadSpeeches() {
+        public ChapterBuilder loadSpeeches() {
             // ...
             return this;
         }
@@ -64,7 +64,7 @@ public class ChapterImpl implements Chapter{
         }
     }
 
-    private ChapterImpl(Builder builder) {
+    private ChapterImpl(ChapterBuilder builder) {
         // required parameters
         title = builder.titleB;
 
