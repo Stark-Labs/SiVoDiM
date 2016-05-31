@@ -2,17 +2,11 @@ package starklabs.sivodim.Drama.Model.Screenplay;
 
 import android.content.Context;
 
-import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
-
-import java.io.File;
-import java.util.concurrent.ThreadPoolExecutor;
-
-import starklabs.sivodim.Drama.Model.Utilities.Soundtrack;
-import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 
 /**
  * Created by io on 28/05/2016.
@@ -47,8 +41,32 @@ public abstract class FfmpegConnector {
 
     public void exec() throws FFmpegCommandAlreadyRunningException {
         String cmd=getCommand();
-        FfmpegStatus response=new FfmpegStatus();
-        ffmpeg.execute(cmd.split(" "),response);
+        ffmpeg.execute(cmd.split(" "), new FFmpegExecuteResponseHandler() {
+            @Override
+            public void onSuccess(String message) {
+
+            }
+
+            @Override
+            public void onProgress(String message) {
+
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
         while (!ffmpeg.isFFmpegCommandRunning()){
             try {
                 Thread.sleep(10);
