@@ -12,4 +12,5 @@ public interface Character {
     Avatar getAvatar();
     String getVoiceID();
     String getName();
+    CharacterImpl clone();
 }

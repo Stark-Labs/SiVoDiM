@@ -12,4 +12,16 @@
     tools:context="starklabs.sivodim.Drama.View.ListSpeechesActivity"
     tools:showIn="@layout/activity_list_speeches">
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:dividerHeight="15dp"
+        android:divider="#ffffff"
+        android:id="@+id/speechesListView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="false"
+        android:nestedScrollingEnabled="false"
+        android:visibility="visible" />
 </RelativeLayout>

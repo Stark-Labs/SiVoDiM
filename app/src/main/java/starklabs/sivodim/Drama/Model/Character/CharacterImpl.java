@@ -51,6 +51,11 @@ public class CharacterImpl implements Character {
         this.voiceID = builder.voiceIDB;
     }
 
+    @Override
+    public CharacterImpl clone(){
+        return this.clone();
+    }
+
     // setter
     @Override
     public void setAvatar(Avatar avatar) {

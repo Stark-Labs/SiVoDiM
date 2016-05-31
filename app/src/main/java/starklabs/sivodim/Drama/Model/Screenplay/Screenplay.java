@@ -1,5 +1,7 @@
 package starklabs.sivodim.Drama.Model.Screenplay;
 
+import java.util.Iterator;
+
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
 
@@ -12,4 +14,7 @@ public interface Screenplay {
     void addChapter(Chapter chapter);
     void addCharacter(Character character);
     void removeCharacter(Character character);
+    void importCharacters(Screenplay screenplay);
+    CharacterContainer getCharacters();
+    Iterator<Chapter> getChapterIterator();
 }
