@@ -11,5 +11,7 @@ public class EditSpeechActivity extends AppCompatActivity implements EditSpeechI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_speech);
+
+        getSupportActionBar().setTitle("Modifica battuta");
     }
 }

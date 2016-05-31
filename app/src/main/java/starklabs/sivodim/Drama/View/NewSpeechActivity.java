@@ -11,5 +11,7 @@ public class NewSpeechActivity extends AppCompatActivity implements NewSpeechInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_speech);
+
+        getSupportActionBar().setTitle("Creazione battuta");
     }
 }

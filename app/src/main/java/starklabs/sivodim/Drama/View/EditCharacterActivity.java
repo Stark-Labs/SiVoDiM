@@ -11,5 +11,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_character);
+
+        getSupportActionBar().setTitle("Modifica personaggio");
     }
 }

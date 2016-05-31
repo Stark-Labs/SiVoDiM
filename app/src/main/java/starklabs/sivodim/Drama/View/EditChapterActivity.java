@@ -11,5 +11,8 @@ public class EditChapterActivity extends AppCompatActivity implements EditChapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_chapter);
+
+        getSupportActionBar().setTitle("Modifica capitolo");
+
     }
 }

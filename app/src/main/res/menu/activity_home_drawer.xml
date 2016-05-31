@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_config"
             android:icon="@mipmap/config_ico"
-            android:title="Aggiungi voce" />
+            android:title="Configura voci" />
         <item
             android:id="@+id/nav_guide"
             android:icon="@mipmap/guide_ico"
