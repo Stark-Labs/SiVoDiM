@@ -14,6 +14,6 @@ public class Soundtrack extends Sound {
 
     @Override
     protected long maxSize() {
-        return maxSize();
+        return maxSize;
     }
 }
