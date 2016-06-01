@@ -12,5 +12,8 @@ public interface Screenplay {
     void addChapter(Chapter chapter);
     void addCharacter(Character character);
     void removeCharacter(Character character);
+    void importCharacters(Screenplay screenplay);
+    CharacterContainer getCharacters();
+    Iterator<Chapter> getChapterIterator();
     Character getCharacterByName(String name);
 }

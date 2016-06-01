@@ -87,6 +87,11 @@ public class ChapterImpl implements Chapter{
     }
 
     @Override
+    public String getTitle(){
+        return title;
+    }
+
+    @Override
     public void moveSpeech(){
 
     }

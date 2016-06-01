@@ -1,5 +1,8 @@
 package starklabs.sivodim.Drama.Presenter;
 
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
 import java.util.Vector;
 
 /**
@@ -8,4 +11,6 @@ import java.util.Vector;
 public interface HomePresenter {
     Vector<String> getScreenplayNames();
     void createScreenplayList();
+    ArrayAdapter<String> getTitlesAdapter(Context context);
+    String[] loadScreenplayTitles();
 }

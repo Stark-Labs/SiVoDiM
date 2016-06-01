@@ -21,8 +21,10 @@
         android:layout_marginBottom="37dp" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listview"
+        android:id="@+id/screenplayListView"
         android:layout_width="match_parent"
+        android:dividerHeight="10dp"
+        android:divider="#ffffff"
         android:layout_height="match_parent"/>
 
 </RelativeLayout>

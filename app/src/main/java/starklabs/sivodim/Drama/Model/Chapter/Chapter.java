@@ -21,6 +21,6 @@ public interface Chapter {
     void setSoundtrack(Soundtrack soundtrack);
     void deleteBackground();
     void deleteSoundtrack();
-
+    String getTitle();
     void moveSpeech();
 }
