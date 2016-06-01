@@ -23,7 +23,8 @@ import starklabs.sivodim.Drama.Presenter.ChapterPresenterImpl;
 import starklabs.sivodim.Drama.Presenter.SpeechArrayAdapter;
 import starklabs.sivodim.R;
 
-public class ListSpeechesActivity extends AppCompatActivity implements ListSpeechesInterface{
+public class ListSpeechesActivity extends AppCompatActivity implements ListSpeechesInterface,
+        Toolbar.OnMenuItemClickListener{
     private static ChapterPresenter chapterPresenter;
     private ListView speechListView;
     private SpeechArrayAdapter speechListAdapter;
@@ -54,8 +55,8 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(view.getContext(),NewSpeechActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -86,6 +87,8 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
             }
         });
 
+        toolbar.setOnMenuItemClickListener(this);
+
     }
 
     @Override
@@ -99,4 +102,24 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
         }
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.editChapterMenu:
+                Intent editCharacterIntent=new Intent(this,EditChapterActivity.class);
+                editCharacterIntent.putExtra("ChapterToEdit","Nome capitolo.."/*chapterPresenter.getChapter().getTitle()*/);
+                startActivity(editCharacterIntent);
+                break;
+            case R.id.listCharacterMenu:
+                Intent listCharacterIntent=new Intent(this,ListCharacterActivity.class);
+                listCharacterIntent.putExtra("ScreenplayWithCharacters","Nome Screenplay"/*chapterPresenter.getChapter().getTitle()*/);
+                startActivity(listCharacterIntent);
+                break;
+            case R.id.newCharacterMenu:
+                Intent newCharacterIntent=new Intent(this,NewCharacterActivity.class);
+                startActivity(newCharacterIntent);
+                break;
+        }
+        return false;
+    }
 }

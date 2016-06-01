@@ -125,6 +125,16 @@ public class ChapterImpl implements Chapter{
     }
 
     @Override
+    public int getSpeechId(Speech speech){
+        return speeches.indexOf(speech);
+    }
+
+    @Override
+    public Speech getSpeechById(int id){
+        return speeches.get(id);
+    }
+
+    @Override
     public void deleteBackground() {
 
     }

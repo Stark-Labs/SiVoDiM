@@ -1,5 +1,6 @@
 package starklabs.sivodim.Drama.View;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,9 +22,10 @@ import starklabs.sivodim.Drama.Presenter.ScreenplayPresenter;
 import starklabs.sivodim.Drama.Presenter.ScreenplayPresenterImpl;
 import starklabs.sivodim.R;
 
-public class ListChapterActivity extends AppCompatActivity implements ListChapterInterface{
+public class ListChapterActivity extends AppCompatActivity implements ListChapterInterface,
+        Toolbar.OnMenuItemClickListener{
 
-    private ScreenplayPresenter screenplayPresenter;
+    private static ScreenplayPresenter screenplayPresenter;
     private ListView chapterListView;
     private ListAdapter chapterListAdapter;
 
@@ -54,8 +56,8 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent=new Intent(view.getContext(),NewChapterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -73,6 +75,8 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
             }
         });
 
+        toolbar.setOnMenuItemClickListener(this);
+
     }
 
     @Override
@@ -86,4 +90,35 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         }
     }
 
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.saveMenu:
+                Toast.makeText(this,"Salva",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.exportMenu:
+                Toast.makeText(this,"Esporta",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.shareMenu:
+                Toast.makeText(this,"Condividi",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.editMenu:
+                Toast.makeText(this,"Modifica",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.newCharacterMenu:
+                Intent newCharacterIntent=new Intent(this,NewCharacterActivity.class);
+                startActivity(newCharacterIntent);
+                break;
+            case R.id.importCharactersMenu:
+                Toast.makeText(this,"Importa personaggio",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.charactersListMenu:
+                Intent listCharacterIntent=new Intent(this,ListCharacterActivity.class);
+                listCharacterIntent.putExtra("ScreenplayWithCharacters","Nome Screenplay"/*retrive title*/);
+                startActivity(listCharacterIntent);
+                break;
+        }
+        return false;
+    }
 }

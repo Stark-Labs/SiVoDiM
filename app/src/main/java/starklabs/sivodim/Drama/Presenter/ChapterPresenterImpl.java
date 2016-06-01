@@ -33,6 +33,19 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         this.listSpeechesInterface=listSpeechesInterface;
     }
 
+    public ChapterPresenterImpl(EditChapterInterface editChapterInterface){
+        this.editChapterInterface=editChapterInterface;
+    }
+
+    public ChapterPresenterImpl(NewChapterInterface newChapterInterface){
+        this.newChapterInterface=newChapterInterface;
+    }
+
+    @Override
+    public Chapter getChapter(){
+        return this.chapter;
+    }
+
     public void loadSpeeches(Context context){
         speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);
         //load from memory...

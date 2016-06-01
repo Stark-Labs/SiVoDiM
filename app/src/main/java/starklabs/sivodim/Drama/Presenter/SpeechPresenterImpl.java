@@ -18,6 +18,10 @@ public class SpeechPresenterImpl implements SpeechPresenter {
         this.editSpeechInterface=editSpeechActivity;
     }
 
+    public SpeechPresenterImpl(NewSpeechInterface newSpeechInterface){
+        this.newSpeechInterface=newSpeechInterface;
+    }
+
     @Override
     public void newSpeech() {
 

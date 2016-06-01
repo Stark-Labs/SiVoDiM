@@ -24,8 +24,8 @@ public class EditSpeechActivity extends AppCompatActivity implements EditSpeechI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_speech);
 
-        String speech=(String) getIntent().getSerializableExtra("SpeechSelected");
-        //if(speechPresenter==null)speechPresenter=new SpeechPresenterImpl(this,speech);
+        Speech speech=(Speech) getIntent().getSerializableExtra("SpeechSelected");
+        if(speechPresenter==null)speechPresenter=new SpeechPresenterImpl(this,speech);
 
         getSupportActionBar().setTitle("Gestione battuta");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -35,13 +35,13 @@ public class EditSpeechActivity extends AppCompatActivity implements EditSpeechI
         emotion=(Spinner)findViewById(R.id.Emotion);
         character=(Spinner)findViewById(R.id.character);
 
-        speechText.setText(speech);
-       /* ArrayAdapter emotions=(ArrayAdapter) emotion.getAdapter();
+        speechText.setText(speech.getText());
+        ArrayAdapter emotions=(ArrayAdapter) emotion.getAdapter();
         int position=emotions.getPosition(speech.getEmotion());
         emotion.setSelection(position);
         ArrayAdapter characters=(ArrayAdapter) emotion.getAdapter();
         position=characters.getPosition(speech.getCharacter().getName());
-        character.setSelection(position);*/
+        character.setSelection(position);
 
     }
 }

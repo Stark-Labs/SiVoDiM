@@ -22,5 +22,7 @@ public interface Chapter {
     void deleteBackground();
     void deleteSoundtrack();
     String getTitle();
+    int getSpeechId(Speech speech);
+    Speech getSpeechById(int id);
     void moveSpeech();
 }
