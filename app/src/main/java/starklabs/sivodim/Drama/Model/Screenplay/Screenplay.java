@@ -1,5 +1,7 @@
 package starklabs.sivodim.Drama.Model.Screenplay;
 
+import java.util.Iterator;
+
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
 
