@@ -1,5 +1,6 @@
 package starklabs.sivodim.Drama.Model.Chapter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -9,7 +10,7 @@ import starklabs.sivodim.Drama.Model.Utilities.SoundFx;
 /**
  * Created by Riccardo Rizzo on 25/05/2016.
  */
-public interface Speech {
+public interface Speech extends Serializable {
     // setter
     void setText(String text);
     void setEmotion(String emotionID);

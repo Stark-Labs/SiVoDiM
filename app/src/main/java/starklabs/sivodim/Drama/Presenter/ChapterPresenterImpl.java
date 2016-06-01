@@ -45,11 +45,12 @@ public class ChapterPresenterImpl implements ChapterPresenter {
                 .build();
         speechBuilder.setEmotion("ANGER")
                 .setCharacter(character)
-                .setText("speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);\n" +
-                        "        //load from memory...\n" +
-                        "        SpeechImpl.SpeechBuilder speechBuilder=new SpeechImpl.SpeechBuilder();\n" +
-                        "        Character character=new CharacterImpl.CharacterBuilder()\n" +
-                        "                .setAvatar(new Avatar(new File(context.");
+                .setText("hdwhcvdwhvhdwvhkdbvhk.bvhk.\n" +
+                        "j,bv ,jsfvh,vkhwkh.vbk.hBVK.FB.VKBs\n" +
+                        "fj,v h,dsvb.khsdv.khvbd.hksvbj.dsbv\n" +
+                        "djhcvjhdvkhc.cdv.khbdk.vbdj.skbvjlsdbv" +
+                        "sdkhbchldsbvhksdvbhvbdjslvbljs-dbvlj-sdbvl" +
+                        "sjdhvchdkvk.hdvk.hds");
         speechArrayAdapter.add(speechBuilder.build());
         speechArrayAdapter.add(speechBuilder.build());
         speechArrayAdapter.add(speechBuilder.build());

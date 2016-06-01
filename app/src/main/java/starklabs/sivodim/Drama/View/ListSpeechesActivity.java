@@ -17,6 +17,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import starklabs.sivodim.Drama.Model.Chapter.Speech;
 import starklabs.sivodim.Drama.Presenter.ChapterPresenter;
 import starklabs.sivodim.Drama.Presenter.ChapterPresenterImpl;
 import starklabs.sivodim.Drama.Presenter.SpeechArrayAdapter;
@@ -77,7 +78,10 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
         speechListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(view.getContext(),"LongPress",Toast.LENGTH_LONG).show();
+                Speech selected=(Speech) parent.getItemAtPosition(position);
+                Intent intent=new Intent(view.getContext(),EditSpeechActivity.class);
+                intent.putExtra("SpeechSelected",selected.getText());
+                startActivity(intent);
                 return false;
             }
         });
