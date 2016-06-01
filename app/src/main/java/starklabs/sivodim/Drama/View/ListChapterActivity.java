@@ -62,7 +62,7 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         });
 
         chapterListView=(ListView) findViewById(R.id.listChapterView);
-        chapterListAdapter=screenplayPresenter.getTitlesAdapter(this,"ScreenplayName");
+        chapterListAdapter=screenplayPresenter.getTitlesAdapter(this,title);
         chapterListView.setAdapter(chapterListAdapter);
 
         chapterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

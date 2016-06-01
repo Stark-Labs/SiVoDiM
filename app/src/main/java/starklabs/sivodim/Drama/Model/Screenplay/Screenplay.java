@@ -17,4 +17,5 @@ public interface Screenplay {
     void importCharacters(Screenplay screenplay);
     CharacterContainer getCharacters();
     Iterator<Chapter> getChapterIterator();
+    Character getCharacterByName(String name);
 }

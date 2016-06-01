@@ -16,6 +16,6 @@ public interface ScreenplayPresenter {
     void orderChapter();
     boolean save();
     void addCharacter(Character character);
-    void importCharacter(String screenplay);
+    void importCharacter(String screenplay,Context context);
     ArrayAdapter<String> getTitlesAdapter(Context context, String sceenplay);
 }

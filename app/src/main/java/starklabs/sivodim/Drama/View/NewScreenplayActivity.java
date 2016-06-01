@@ -44,7 +44,7 @@ public class NewScreenplayActivity extends AppCompatActivity implements NewScree
         String title = editTextProjectName.getText().toString();
         screenplayPresenter.newScreenplay(title);
         String selected=(String) spinnerImportCharacters.getSelectedItem();
-        screenplayPresenter.importCharacter(selected);
+        screenplayPresenter.importCharacter(selected, this);
     }
 
     @Override

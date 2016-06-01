@@ -3,6 +3,7 @@ package starklabs.sivodim.Drama.Presenter;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 
+import java.io.File;
 import java.util.Vector;
 
 import starklabs.sivodim.Drama.View.HomeInterface;
@@ -22,14 +23,27 @@ public class HomePresenterImpl implements HomePresenter {
     }
 
     @Override
-    public String[] loadScreenplayTitles(){
-        return new String[]{"Star Wars","Lord of The Rings","Inside Out","Toy Story","District 9"};
+    public Vector<String> loadScreenplayTitles(Context context){
+        File dir = context.getFilesDir();
+        File[] directoryListing = dir.listFiles();
+        Vector<String> screenplayTitles = new Vector<String>();
+        if (directoryListing != null) {
+            for (int i=0; i < directoryListing.length; ++i) {
+                screenplayTitles.add(directoryListing[i].getName());
+            }
+        } else {
+            // Handle the case where dir is not really a directory.
+            // Checking dir.isDirectory() above would not be sufficient
+            // to avoid race conditions with another process that deletes
+            // directories.
+        }
+        return screenplayTitles;
     }
 
     @Override
     public ArrayAdapter<String> getTitlesAdapter(Context context){
         if(titlesAdapter==null){
-            titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadScreenplayTitles());
+            titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadScreenplayTitles(context));
         }
         return titlesAdapter;
     }

@@ -1,5 +1,9 @@
 package starklabs.sivodim.Drama.Model.Screenplay;
 
+import android.content.Context;
+import android.os.Environment;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -9,6 +13,7 @@ import java.util.Vector;
 
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
+import starklabs.sivodim.Drama.Model.Utilities.XMLParser;
 
 /**
  * Created by io on 25/05/2016.
@@ -25,9 +30,13 @@ public class ScreenplayImpl implements Screenplay {
         characterContainer=new CharacterContainer();
     }
 
-    public static Screenplay loadScreenplay(String name){
-
-        return null;
+    public static Screenplay loadScreenplay(String name, Context context){
+        File dir = context.getFilesDir();
+        File myFile = new File(dir,name);
+        System.out.println(myFile.getAbsolutePath());
+        XMLParser xmlParser = new XMLParser();
+        xmlParser.parseXml(myFile);
+        return xmlParser.getParsedData();
     }
 
     @Override
@@ -69,5 +78,16 @@ public class ScreenplayImpl implements Screenplay {
     @Override
     public void removeCharacter(Character character){
         characterContainer.removeCharacter(character);
+    }
+
+    @Override
+    public Character getCharacterByName(String name) {
+        Iterator<Character> iterator = characterContainer.iterator();
+        while(iterator.hasNext()) {
+            Character character = iterator.next();
+            if(character.getName() == name)
+                return character;
+        }
+        return null;
     }
 }
