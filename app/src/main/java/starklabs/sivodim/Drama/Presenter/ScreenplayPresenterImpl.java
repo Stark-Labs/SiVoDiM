@@ -59,8 +59,8 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     }
 
     @Override
-    public void importCharacter(String screenplay){
-        this.screenplay.importCharacters(ScreenplayImpl.loadScreenplay(screenplay));
+    public void importCharacter(String screenplay,Context context){
+        this.screenplay.importCharacters(ScreenplayImpl.loadScreenplay(screenplay,context));
     }
 
     @Override
