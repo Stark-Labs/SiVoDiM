@@ -68,23 +68,24 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
 
     }
 
-    private String[] loadChapterTitles(String screenplay){
-        /*if(this.screenplay==null){
-            this.screenplay=ScreenplayImpl.loadScreenplay(screenplay);}
-        Iterator<Chapter>chapterIterator=this.screenplay.getChapterIterator();
+    private Vector<String> loadChapterTitles(String screenplay, Context context){
+        if(this.screenplay==null){
+            this.screenplay=ScreenplayImpl.loadScreenplay(screenplay, context);
+        }
+        if(this.screenplay==null)System.out.println("MALE");
+        Iterator<Chapter> chapterIterator=this.screenplay.getChapterIterator();
         Vector<String> result=new Vector<>();
         while (chapterIterator.hasNext()){
             Chapter chapter=chapterIterator.next();
             result.add(chapter.getTitle());
         }
-        return (String[]) result.toArray();*/
-        return new String[]{"capitolo1","capitolo2","capitolo3"};
+        return result;
     }
 
     @Override
     public ArrayAdapter<String> getTitlesAdapter(Context context,String screenplay){
         if(titlesAdapter==null)
-            titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadChapterTitles(screenplay));
+            titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadChapterTitles(screenplay, context));
         return titlesAdapter;
     }
 

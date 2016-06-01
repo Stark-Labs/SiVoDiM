@@ -23,13 +23,13 @@ public class HomePresenterImpl implements HomePresenter {
     }
 
     @Override
-    public String[] loadScreenplayTitles(Context context){
+    public Vector<String> loadScreenplayTitles(Context context){
         File dir = context.getFilesDir();
         File[] directoryListing = dir.listFiles();
-        String[] screenplayTitles = null;
+        Vector<String> screenplayTitles = new Vector<String>();
         if (directoryListing != null) {
             for (int i=0; i < directoryListing.length; ++i) {
-                screenplayTitles[i] = directoryListing[i].getName();
+                screenplayTitles.add(directoryListing[i].getName());
             }
         } else {
             // Handle the case where dir is not really a directory.

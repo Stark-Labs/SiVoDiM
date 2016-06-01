@@ -32,7 +32,8 @@ public class ScreenplayImpl implements Screenplay {
 
     public static Screenplay loadScreenplay(String name, Context context){
         File dir = context.getFilesDir();
-        File myFile = new File(dir,name+".xml");
+        File myFile = new File(dir,name);
+        System.out.println(myFile.getAbsolutePath());
         XMLParser xmlParser = new XMLParser();
         xmlParser.parseXml(myFile);
         return xmlParser.getParsedData();
