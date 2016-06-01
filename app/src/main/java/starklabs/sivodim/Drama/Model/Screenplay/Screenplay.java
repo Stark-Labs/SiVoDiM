@@ -12,4 +12,5 @@ public interface Screenplay {
     void addChapter(Chapter chapter);
     void addCharacter(Character character);
     void removeCharacter(Character character);
+    Character getCharacterByName(String name);
 }

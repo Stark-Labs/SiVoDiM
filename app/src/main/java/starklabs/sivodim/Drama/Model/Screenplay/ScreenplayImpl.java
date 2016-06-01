@@ -1,6 +1,7 @@
 package starklabs.sivodim.Drama.Model.Screenplay;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,5 +46,16 @@ public class ScreenplayImpl implements Screenplay {
     @Override
     public void removeCharacter(Character character){
         characterContainer.removeCharacter(character);
+    }
+
+    @Override
+    public Character getCharacterByName(String name) {
+        Iterator<Character> iterator = characterContainer.iterator();
+        while(iterator.hasNext()) {
+            Character character = iterator.next();
+            if(character.getName() == name)
+                return character;
+        }
+        return null;
     }
 }

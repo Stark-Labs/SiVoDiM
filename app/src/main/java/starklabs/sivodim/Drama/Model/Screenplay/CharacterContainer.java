@@ -28,5 +28,4 @@ public class CharacterContainer {
     public void removeCharacter(Character character){
         characters.remove(character);
     }
-
 }
