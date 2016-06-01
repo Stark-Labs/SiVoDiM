@@ -50,6 +50,11 @@ public class ScreenplayImpl implements Screenplay {
     }
 
     @Override
+    public String getTitle(){
+        return title;
+    }
+
+    @Override
     public void share() {
 
     }
@@ -78,6 +83,17 @@ public class ScreenplayImpl implements Screenplay {
     @Override
     public void removeCharacter(Character character){
         characterContainer.removeCharacter(character);
+    }
+
+    @Override
+    public Chapter getChapter(String title){
+        Iterator<Chapter> chapterIterator=chapters.iterator();
+        while (chapterIterator.hasNext()){
+            Chapter chapter=chapterIterator.next();
+            if(chapter.getTitle().equals(title))
+                return chapter;
+        }
+        return null;
     }
 
     @Override

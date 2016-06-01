@@ -83,7 +83,8 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         speechText.setTextColor(color);
         speechText.setBackgroundDrawable(drawable);
         speechText.setText(speechObj.getText());
-        speechAvatar.setImageBitmap(speechObj.getCharacter().getAvatar().getImage());
+        if(speechObj.getCharacter()!=null)
+            speechAvatar.setImageBitmap(speechObj.getCharacter().getAvatar().getImage());
         return row;
     }
 }

@@ -1,13 +1,17 @@
 package starklabs.sivodim.Drama.Presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ArrayAdapter;
 
 import java.io.File;
 import java.util.Vector;
 
+import starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl;
 import starklabs.sivodim.Drama.View.HomeInterface;
+import starklabs.sivodim.Drama.View.ListChapterActivity;
 import starklabs.sivodim.R;
+
 
 /**
  * Created by io on 25/05/2016.
@@ -29,7 +33,10 @@ public class HomePresenterImpl implements HomePresenter {
         Vector<String> screenplayTitles = new Vector<String>();
         if (directoryListing != null) {
             for (int i=0; i < directoryListing.length; ++i) {
-                screenplayTitles.add(directoryListing[i].getName());
+                String name=directoryListing[i].getName();
+                String extension=name.substring(name.lastIndexOf(".")+1);
+                if(extension.equals("scrpl"))
+                screenplayTitles.add(name.substring(0,name.lastIndexOf(".")));
             }
         } else {
             // Handle the case where dir is not really a directory.
@@ -38,6 +45,15 @@ public class HomePresenterImpl implements HomePresenter {
             // directories.
         }
         return screenplayTitles;
+    }
+
+    @Override
+    public void goToListChapter(Context context,String selected){
+        Intent intent=new Intent(context,ListChapterActivity.class);
+        ScreenplayPresenter screenplayPresenter=new ScreenplayPresenterImpl(
+                ScreenplayImpl.loadScreenplay(selected,context));
+        ListChapterActivity.setPresenter(screenplayPresenter);
+        context.startActivity(intent);
     }
 
     @Override

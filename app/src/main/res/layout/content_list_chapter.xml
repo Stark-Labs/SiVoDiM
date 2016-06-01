@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,11 +10,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="starklabs.sivodim.Drama.View.ListChapterActivity"
+    android:orientation="vertical"
     tools:showIn="@layout/activity_list_chapter">
 
-    <ListView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Capitoli:"
+        android:paddingBottom="15dp"
+        android:id="@+id/labelChapters"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/listChapterView"
         android:dividerHeight="10dp"
         android:layout_alignParentTop="true"
@@ -23,4 +32,4 @@
         android:background="#ffffff"
         android:drawSelectorOnTop="false"
         android:divider="#ffffff" />
-</RelativeLayout>
+</LinearLayout>

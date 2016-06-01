@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
 import java.io.File;
+import java.util.ListIterator;
 
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Chapter.Speech;
@@ -13,6 +14,7 @@ import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Character.CharacterImpl;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.View.EditChapterInterface;
+import starklabs.sivodim.Drama.View.ListChapterInterface;
 import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesInterface;
 import starklabs.sivodim.Drama.View.NewChapterInterface;
@@ -29,6 +31,10 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     SpeechArrayAdapter speechArrayAdapter;
 
 
+    public ChapterPresenterImpl(Chapter chapter){
+        this.chapter=chapter;
+    }
+
     public ChapterPresenterImpl(ListSpeechesInterface listSpeechesInterface){
         this.listSpeechesInterface=listSpeechesInterface;
     }
@@ -42,13 +48,19 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     }
 
     @Override
-    public Chapter getChapter(){
-        return this.chapter;
+    public String getChapterTitle(){
+        if(chapter!=null)return chapter.getTitle();
+        return null;
+    }
+
+    @Override
+    public void setActivity(ListSpeechesInterface listSpeechesInterface){
+        this.listSpeechesInterface=listSpeechesInterface;
     }
 
     public void loadSpeeches(Context context){
         speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);
-        //load from memory...
+        /*/load from memory...
         SpeechImpl.SpeechBuilder speechBuilder=new SpeechImpl.SpeechBuilder();
         Character character=new CharacterImpl.CharacterBuilder()
                 .setAvatar(new Avatar(new File(context.getFilesDir(),"anger.png")
@@ -66,7 +78,11 @@ public class ChapterPresenterImpl implements ChapterPresenter {
                         "sjdhvchdkvk.hdvk.hds");
         speechArrayAdapter.add(speechBuilder.build());
         speechArrayAdapter.add(speechBuilder.build());
-        speechArrayAdapter.add(speechBuilder.build());
+        speechArrayAdapter.add(speechBuilder.build());*/
+        ListIterator<Speech> speechListIterator=chapter.getSpeechIterator();
+        while (speechListIterator.hasNext()){
+            speechArrayAdapter.add(speechListIterator.next());
+        }
     }
 
     @Override

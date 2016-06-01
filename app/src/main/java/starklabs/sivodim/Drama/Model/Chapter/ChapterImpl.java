@@ -99,7 +99,7 @@ public class ChapterImpl implements Chapter{
     // add new speech: push back new speech to ArrayList containing existing speeches
     @Override
     public void addSpeech(Speech speech) {
-
+        speeches.add(speech);
     }
 
     // setter methods: edit existing parameters or set new values (title, background, soundtrack)

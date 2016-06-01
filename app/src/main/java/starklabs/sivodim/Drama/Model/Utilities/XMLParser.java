@@ -39,10 +39,90 @@ public class XMLParser {
     }
 
     // data structure containing parsed data
-    Screenplay parsedData;
+    private Screenplay parsedData;
 
     // return data structure with parsed screenplays
     public Screenplay getParsedData() { return parsedData; }
+
+    private void parseCharacter(Node node){
+        //NodeList charactersList = ((Element) c).getElementsByTagName("character");
+        NodeList charactersList = node.getChildNodes();
+        for (int k = 0; k < charactersList.getLength(); k++) {
+            Node c1 = charactersList.item(k);
+            if (c1.getNodeType() == Node.ELEMENT_NODE) {
+                Element characterElem = (Element) c1; // cast
+                String name = characterElem.getAttribute("name");
+                String avatarPath = characterElem.getAttribute("avatar");
+                String voice = characterElem.getAttribute("voice");
+
+                Avatar avatar = new Avatar(avatarPath);
+
+                Character character = new CharacterImpl.CharacterBuilder()
+                        .setName(name)
+                        .setAvatar(avatar)
+                        .setVoice(voice)
+                        .build();
+
+                parsedData.addCharacter(character);
+            }
+        }
+    }
+
+    private void parseChapter(Node node){
+        //NodeList chaptersList = ((Element) c).getElementsByTagName("chapter");
+        NodeList chaptersList = node.getChildNodes();
+        for (int k = 0; k < chaptersList.getLength(); k++) {
+            Node c1 = chaptersList.item(k);
+
+            vDebug("Verifica lettura nodi interni a capitolo :" + c1.getNodeName());
+            vDebug("");
+
+            if (c1.getNodeType() == Node.ELEMENT_NODE) {
+                Element chapterElem = (Element) c1; // cast
+                String chapterTitle = chapterElem.getAttribute("title");
+                vDebug("Titolo capitolo: "+chapterTitle);
+                String backgroundPath = chapterElem.getAttribute("background");
+                String soundtrackPath = chapterElem.getAttribute("soundtrack");
+                Background background = new Background(backgroundPath);
+                Soundtrack soundtrack = new Soundtrack(soundtrackPath);
+
+                Chapter chapter = new ChapterImpl.ChapterBuilder()
+                        .setTitle(chapterTitle)
+                        .setBackground(background)
+                        .setSoundtrack(soundtrack)
+                        .build();
+
+                NodeList speechesList = ((Element) c1).getElementsByTagName("speech");
+                // tag cased
+                for (int z = 0; z < speechesList.getLength(); z++) {
+                    Node c2 = speechesList.item(z);
+                    Element speechElem = (Element) c2; // cast
+                    if(speechElem!=null) {
+                        String text = speechElem.getTextContent();
+                        String characterName = speechElem.getAttribute("character");
+                        String emotion = speechElem.getAttribute("emotion");
+                        String soundFxPath = speechElem.getAttribute("soundFx");
+                        SoundFx soundFx = new SoundFx(soundFxPath);
+
+                        Character character = parsedData.getCharacterByName(characterName);
+
+                        Speech speech = new SpeechImpl.SpeechBuilder()
+                                .setText(text)
+                                .setEmotion(emotion)
+                                .setSoundFX(soundFx)
+                                .build();
+
+                        if (character != null) speech.setCharacter(character);
+
+                        vDebug("SPEECH: "+speech.getText());
+                        chapter.addSpeech(speech);
+                    }
+                }
+
+                parsedData.addChapter(chapter);
+            }
+        }
+    }
 
     public void parseXml(File file) {
         Document doc;
@@ -79,82 +159,10 @@ public class XMLParser {
 
                     // tag cases
                     if (nodeName.equals("characters")) {
-                        //NodeList charactersList = ((Element) c).getElementsByTagName("character");
-                        NodeList charactersList = c.getChildNodes();
-                        for (int k = 0; k < charactersList.getLength(); k++) {
-                            Node c1 = charactersList.item(k);
-
-                            vDebug("Verifica lettura nodi interni a personaggi :" + c1.getNodeName());
-                            vDebug("");
-
-                            if (c1.getNodeType() == Node.ELEMENT_NODE) {
-                                Element characterElem = (Element) c1; // cast
-                                String name = characterElem.getAttribute("name");
-                                String avatarPath = characterElem.getAttribute("avatar");
-                                String voice = characterElem.getAttribute("voice");
-
-                                Avatar avatar = new Avatar(avatarPath);
-
-                                Character character = new CharacterImpl.CharacterBuilder()
-                                        .setName(name)
-                                        .setAvatar(avatar)
-                                        .setVoice(voice)
-                                        .build();
-
-                                parsedData.addCharacter(character);
-                            }
-                        }
+                        parseCharacter(c);
                     }
                     if (nodeName.equals("chapters")) {
-                        //NodeList chaptersList = ((Element) c).getElementsByTagName("chapter");
-                        NodeList chaptersList = c.getChildNodes();
-                        for (int k = 0; k < chaptersList.getLength(); k++) {
-                            Node c1 = chaptersList.item(k);
-
-                            vDebug("Verifica lettura nodi interni a capitolo :" + c1.getNodeName());
-                            vDebug("");
-
-                            if (c1.getNodeType() == Node.ELEMENT_NODE) {
-                                Element chapterElem = (Element) c1; // cast
-                                String chapterTitle = chapterElem.getAttribute("title");
-                                String backgroundPath = chapterElem.getAttribute("background");
-                                String soundtrackPath = chapterElem.getAttribute("soundtrack");
-                                Background background = new Background(backgroundPath);
-                                Soundtrack soundtrack = new Soundtrack(soundtrackPath);
-
-                                Chapter chapter = new ChapterImpl.ChapterBuilder()
-                                        .setTitle(chapterTitle)
-                                        .setBackground(background)
-                                        .setSoundtrack(soundtrack)
-                                        .build();
-
-                                NodeList speechesList = ((Element) c1).getElementsByTagName("speeches");
-                                // tag cased
-                                for (int z = 0; k < speechesList.getLength(); z++) {
-                                    Node c2 = speechesList.item(z);
-                                    Element speechElem = (Element) c2; // cast
-                                    String text = speechElem.getTextContent();
-                                    String characterName = speechElem.getAttribute("character");
-                                    String emotion = speechElem.getAttribute("emotion");
-                                    String soundFxPath = speechElem.getAttribute("soundFx");
-                                    SoundFx soundFx = new SoundFx(soundFxPath);
-
-                                    Character character = parsedData.getCharacterByName(characterName);
-
-                                    Speech speech = new SpeechImpl.SpeechBuilder()
-                                            .setText(text)
-                                            .setEmotion(emotion)
-                                            .setSoundFX(soundFx)
-                                            .build();
-
-                                    if (character != null) speech.setCharacter(character);
-
-                                    chapter.addSpeech(speech);
-                                }
-
-                                parsedData.addChapter(chapter);
-                            }
-                        }
+                        parseChapter(c);
                     }
                 }
             }

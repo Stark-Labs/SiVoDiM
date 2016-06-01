@@ -18,4 +18,6 @@ public interface Screenplay {
     CharacterContainer getCharacters();
     Iterator<Chapter> getChapterIterator();
     Character getCharacterByName(String name);
+    String getTitle();
+    Chapter getChapter(String title);
 }

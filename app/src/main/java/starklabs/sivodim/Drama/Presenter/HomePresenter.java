@@ -13,4 +13,5 @@ public interface HomePresenter {
     void createScreenplayList();
     ArrayAdapter<String> getTitlesAdapter(Context context);
     Vector<String> loadScreenplayTitles(Context context);
+    void goToListChapter(Context context,String selected);
 }

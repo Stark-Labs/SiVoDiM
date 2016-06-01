@@ -16,11 +16,20 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+
+import java.io.File;
 import java.io.Serializable;
 
+import starklabs.sivodim.Drama.Model.Screenplay.AudioConcatenator;
+import starklabs.sivodim.Drama.Model.Screenplay.AudioMixer;
+import starklabs.sivodim.Drama.Model.Screenplay.Mp3Converter;
+import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
 import starklabs.sivodim.Drama.Presenter.ScreenplayPresenter;
 import starklabs.sivodim.Drama.Presenter.ScreenplayPresenterImpl;
 import starklabs.sivodim.R;
+
+import static android.os.Environment.getExternalStorageDirectory;
 
 public class ListChapterActivity extends AppCompatActivity implements ListChapterInterface,
         Toolbar.OnMenuItemClickListener{
@@ -28,6 +37,10 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
     private static ScreenplayPresenter screenplayPresenter;
     private ListView chapterListView;
     private ListAdapter chapterListAdapter;
+
+    public static void setPresenter(ScreenplayPresenter screenplayPresenter){
+        ListChapterActivity.screenplayPresenter=screenplayPresenter;
+    }
 
     // create the options menu: it's invoked just one time when the activity has been created
     @Override
@@ -43,11 +56,14 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_chapter);
 
-        if(screenplayPresenter==null)screenplayPresenter=new ScreenplayPresenterImpl(this);
+        if(screenplayPresenter==null)
+            screenplayPresenter=new ScreenplayPresenterImpl(this);
+        else
+            screenplayPresenter.setActivity(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String title=(String)getIntent().getSerializableExtra("ScreenplaySelected");
+        String title=screenplayPresenter.getScreenplayTitle();
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,16 +78,14 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         });
 
         chapterListView=(ListView) findViewById(R.id.listChapterView);
-        chapterListAdapter=screenplayPresenter.getTitlesAdapter(this,title);
+        chapterListAdapter=screenplayPresenter.getTitlesAdapter(this,title+".scrpl");
         chapterListView.setAdapter(chapterListAdapter);
 
         chapterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selected=(String) parent.getItemAtPosition(position);
-                Intent intent=new Intent(view.getContext(),ListSpeechesActivity.class);
-                intent.putExtra("ChapterSelected",selected);
-                startActivity(intent);
+                screenplayPresenter.goToListSpeechesActivity(view.getContext(),selected);
             }
         });
 
@@ -98,7 +112,30 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 Toast.makeText(this,"Salva",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportMenu:
-                Toast.makeText(this,"Esporta",Toast.LENGTH_LONG).show();
+                //---- test FFmpeg -----------------------------------------------------------
+                File f=new File(getExternalStorageDirectory(),"pic004.png");
+                System.out.println(f.getAbsolutePath());
+                File file=new File(getFilesDir(),"Airbag.mp3");
+                File file2=new File(getFilesDir(),"concatenation.wav");
+                File dest=new File(getFilesDir(),"parzial.wav");
+                File dest2=new File(getFilesDir(),"mergedAudio.wav");
+                AudioConcatenator am=new AudioConcatenator(this,dest);
+                am.addFile(file2);
+                am.addFile(file2);
+                AudioMixer aam=new AudioMixer(this,dest,file,dest2);
+                File dest3=new File(getFilesDir(),"export.mp3");
+                Mp3Converter mp=new Mp3Converter(this,dest2,dest3);
+                try {
+                    am.exec();
+                    aam.exec();
+                    mp.exec();
+                } catch (FFmpegCommandAlreadyRunningException e) {
+                    e.printStackTrace();
+                }
+                SpeechSound soundtrack=new SpeechSound(dest3.getAbsolutePath());
+                soundtrack.play();
+                Toast.makeText(this,"Esportazione riuscita",Toast.LENGTH_LONG).show();
+                //---- end of test FFmpeg -----------------------------------------------------
                 break;
             case R.id.shareMenu:
                 Toast.makeText(this,"Condividi",Toast.LENGTH_LONG).show();

@@ -29,6 +29,10 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
     private ListView speechListView;
     private SpeechArrayAdapter speechListAdapter;
 
+    public static void setPresenter(ChapterPresenter chapterPresenter){
+        ListSpeechesActivity.chapterPresenter=chapterPresenter;
+    }
+
     // create the options menu: it's invoked just one time when the activity has been created
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -43,10 +47,13 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_speeches);
 
-        if(chapterPresenter==null)chapterPresenter=new ChapterPresenterImpl(this);
+        if(chapterPresenter==null)
+            chapterPresenter=new ChapterPresenterImpl(this);
+        else
+            chapterPresenter.setActivity(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String title=(String)getIntent().getSerializableExtra("ChapterSelected");
+        String title=chapterPresenter.getChapterTitle();
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

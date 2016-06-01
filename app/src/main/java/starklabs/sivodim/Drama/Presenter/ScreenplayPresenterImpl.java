@@ -1,6 +1,7 @@
 package starklabs.sivodim.Drama.Presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ArrayAdapter;
 
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl;
 import starklabs.sivodim.Drama.View.HomeInterface;
 import starklabs.sivodim.Drama.View.ListChapterActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
+import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.NewScreenplayInterface;
 import starklabs.sivodim.R;
 
@@ -29,12 +31,29 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     ArrayAdapter<String> titlesAdapter;
 
 
+    public ScreenplayPresenterImpl(Screenplay screenplay){
+        this.screenplay=screenplay;
+    }
+
     public ScreenplayPresenterImpl(NewScreenplayInterface newScreenplayInterface){
         this.newScreenplayInterface=newScreenplayInterface;
     }
 
     public ScreenplayPresenterImpl(ListChapterInterface listChapterActivity){
         this.listChapterInterface=listChapterActivity;
+    }
+
+    @Override
+    public void goToListSpeechesActivity(Context context,String selected){
+        Intent intent=new Intent(context,ListSpeechesActivity.class);
+        ChapterPresenter chapterPresenter=new ChapterPresenterImpl(screenplay.getChapter(selected));
+        ListSpeechesActivity.setPresenter(chapterPresenter);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void setActivity(ListChapterInterface listChapterInterface){
+        this.listChapterInterface=listChapterInterface;
     }
 
     @Override
@@ -72,7 +91,6 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         if(this.screenplay==null){
             this.screenplay=ScreenplayImpl.loadScreenplay(screenplay, context);
         }
-        if(this.screenplay==null)System.out.println("MALE");
         Iterator<Chapter> chapterIterator=this.screenplay.getChapterIterator();
         Vector<String> result=new Vector<>();
         while (chapterIterator.hasNext()){
@@ -80,6 +98,11 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
             result.add(chapter.getTitle());
         }
         return result;
+    }
+
+    @Override
+    public String getScreenplayTitle(){
+        return screenplay.getTitle();
     }
 
     @Override
