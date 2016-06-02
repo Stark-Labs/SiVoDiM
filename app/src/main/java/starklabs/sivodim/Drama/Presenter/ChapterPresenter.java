@@ -16,4 +16,5 @@ public interface ChapterPresenter {
     String getChapterTitle();
     void setActivity(ListSpeechesInterface listSpeechesInterface);
     void goToEditSpeechActivity(Context context,Speech selected);
+    void goToListCharactersActivity(Context context);
 }

@@ -76,6 +76,8 @@ public class HomeActivity extends AppCompatActivity
         screenplayListView= (ListView) findViewById(R.id.screenplayListView);
         screenplayListAdapter=homePresenter.getTitlesAdapter(this);
         screenplayListView.setAdapter(screenplayListAdapter);
+        if(screenplayListAdapter.getCount()==0)
+            Toast.makeText(this,"Clicca sul + per creare un nuovo progetto",Toast.LENGTH_LONG).show();
 
         screenplayListView.setOnItemClickListener(this);
 

@@ -119,9 +119,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
                 startActivity(editCharacterIntent);
                 break;
             case R.id.listCharacterMenu:
-                Intent listCharacterIntent=new Intent(this,ListCharacterActivity.class);
-                listCharacterIntent.putExtra("ScreenplayWithCharacters","Nome Screenplay"/*chapterPresenter.getChapter().getTitle()*/);
-                startActivity(listCharacterIntent);
+                chapterPresenter.goToListCharactersActivity(this);
                 break;
             case R.id.newCharacterMenu:
                 Intent newCharacterIntent=new Intent(this,NewCharacterActivity.class);

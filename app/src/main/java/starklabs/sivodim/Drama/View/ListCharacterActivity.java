@@ -8,27 +8,46 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import starklabs.sivodim.Drama.Presenter.ChapterPresenterImpl;
+import starklabs.sivodim.Drama.Presenter.CharacterArrayAdapter;
 import starklabs.sivodim.Drama.Presenter.CharacterPresenter;
 import starklabs.sivodim.Drama.Presenter.CharacterPresenterImpl;
 import starklabs.sivodim.R;
 
 public class ListCharacterActivity extends AppCompatActivity implements ListCharacterInterface {
     private static CharacterPresenter characterPresenter;
+    private ListView characterListView;
+    private CharacterArrayAdapter characterArrayAdapter;
+
+
+    public static void setPresenter(CharacterPresenter characterPresenter){
+        ListCharacterActivity.characterPresenter=characterPresenter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_character);
 
-        if(characterPresenter==null)characterPresenter=new CharacterPresenterImpl(this);
+        if(characterPresenter==null)
+            characterPresenter=new CharacterPresenterImpl(this);
+        else
+            characterPresenter.setActivity(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String screenplayWithCharacters=(String)getIntent().getSerializableExtra("ScreenplayWithCharacters");
-        getSupportActionBar().setTitle("Personaggi - "+screenplayWithCharacters);
+        getSupportActionBar().setTitle("Personaggi dello sceneggiato");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        characterListView=(ListView)findViewById(R.id.characterListView);
+        characterArrayAdapter=characterPresenter.getCharacterArrayAdapter(this);
+        characterListView.setAdapter(characterArrayAdapter);
+        if(characterArrayAdapter.getCount()==0)
+            Toast.makeText(this,"Non ci sono personaggi",Toast.LENGTH_LONG).show();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +63,8 @@ public class ListCharacterActivity extends AppCompatActivity implements ListChar
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                Intent intent=new Intent(this,ListChapterActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

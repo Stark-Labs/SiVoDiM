@@ -22,4 +22,5 @@ public interface ScreenplayPresenter {
     String getScreenplayTitle();
     void setActivity(ListChapterInterface listChapterInterface);
     void goToListSpeechesActivity(Context context,String selected);
+    void goToListCharactersActivity(Context context);
 }

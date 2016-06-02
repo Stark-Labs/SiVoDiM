@@ -14,6 +14,7 @@ import starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl;
 import starklabs.sivodim.Drama.View.HomeInterface;
 import starklabs.sivodim.Drama.View.ListChapterActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
+import starklabs.sivodim.Drama.View.ListCharacterActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.NewScreenplayInterface;
 import starklabs.sivodim.R;
@@ -51,6 +52,15 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         ListSpeechesActivity.setPresenter(chapterPresenter);
         context.startActivity(intent);
     }
+
+    @Override
+    public void goToListCharactersActivity(Context context){
+        Intent listCharacterIntent=new Intent(context,ListCharacterActivity.class);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(screenplay.getCharacters());
+        ListCharacterActivity.setPresenter(characterPresenter);
+        context.startActivity(listCharacterIntent);
+    }
+
 
     @Override
     public void setActivity(ListChapterInterface listChapterInterface){

@@ -18,6 +18,7 @@ import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.View.EditChapterInterface;
 import starklabs.sivodim.Drama.View.EditSpeechActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
+import starklabs.sivodim.Drama.View.ListCharacterActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesInterface;
 import starklabs.sivodim.Drama.View.NewChapterInterface;
@@ -86,6 +87,14 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         SpeechPresenter speechPresenter=new SpeechPresenterImpl(selected,characterContainer);
         EditSpeechActivity.setPresenter(speechPresenter);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void goToListCharactersActivity(Context context){
+        Intent listCharacterIntent=new Intent(context,ListCharacterActivity.class);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(characterContainer);
+        ListCharacterActivity.setPresenter(characterPresenter);
+        context.startActivity(listCharacterIntent);
     }
 
     @Override
