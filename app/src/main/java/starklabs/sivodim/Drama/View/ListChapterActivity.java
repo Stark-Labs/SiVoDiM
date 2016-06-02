@@ -97,7 +97,8 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                Intent intent=new Intent(this,HomeActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

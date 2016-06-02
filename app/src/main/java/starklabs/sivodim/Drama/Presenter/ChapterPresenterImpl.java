@@ -1,6 +1,7 @@
 package starklabs.sivodim.Drama.Presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
@@ -12,8 +13,10 @@ import starklabs.sivodim.Drama.Model.Chapter.Speech;
 import starklabs.sivodim.Drama.Model.Chapter.SpeechImpl;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Character.CharacterImpl;
+import starklabs.sivodim.Drama.Model.Screenplay.CharacterContainer;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.View.EditChapterInterface;
+import starklabs.sivodim.Drama.View.EditSpeechActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
 import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesInterface;
@@ -29,10 +32,12 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     NewChapterInterface newChapterInterface;
     EditChapterInterface editChapterInterface;
     SpeechArrayAdapter speechArrayAdapter;
+    CharacterContainer characterContainer;
 
 
-    public ChapterPresenterImpl(Chapter chapter){
+    public ChapterPresenterImpl(Chapter chapter,CharacterContainer characterContainer){
         this.chapter=chapter;
+        this.characterContainer=characterContainer;
     }
 
     public ChapterPresenterImpl(ListSpeechesInterface listSpeechesInterface){
@@ -60,25 +65,7 @@ public class ChapterPresenterImpl implements ChapterPresenter {
 
     public void loadSpeeches(Context context){
         speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);
-        /*/load from memory...
-        SpeechImpl.SpeechBuilder speechBuilder=new SpeechImpl.SpeechBuilder();
-        Character character=new CharacterImpl.CharacterBuilder()
-                .setAvatar(new Avatar(new File(context.getFilesDir(),"anger.png")
-                        .getAbsolutePath()))
-                .setName("Luke Skywalker")
-                .setVoice("voce")
-                .build();
-        speechBuilder.setEmotion("ANGER")
-                .setCharacter(character)
-                .setText("hdwhcvdwhvhdwvhkdbvhk.bvhk.\n" +
-                        "j,bv ,jsfvh,vkhwkh.vbk.hBVK.FB.VKBs\n" +
-                        "fj,v h,dsvb.khsdv.khvbd.hksvbj.dsbv\n" +
-                        "djhcvjhdvkhc.cdv.khbdk.vbdj.skbvjlsdbv" +
-                        "sdkhbchldsbvhksdvbhvbdjslvbljs-dbvlj-sdbvl" +
-                        "sjdhvchdkvk.hdvk.hds");
-        speechArrayAdapter.add(speechBuilder.build());
-        speechArrayAdapter.add(speechBuilder.build());
-        speechArrayAdapter.add(speechBuilder.build());*/
+        //load speeches
         ListIterator<Speech> speechListIterator=chapter.getSpeechIterator();
         while (speechListIterator.hasNext()){
             speechArrayAdapter.add(speechListIterator.next());
@@ -91,6 +78,14 @@ public class ChapterPresenterImpl implements ChapterPresenter {
             loadSpeeches(context);
         }
         return speechArrayAdapter;
+    }
+
+    @Override
+    public void goToEditSpeechActivity(Context context,Speech selected){
+        Intent intent=new Intent(context,EditSpeechActivity.class);
+        SpeechPresenter speechPresenter=new SpeechPresenterImpl(selected,characterContainer);
+        EditSpeechActivity.setPresenter(speechPresenter);
+        context.startActivity(intent);
     }
 
     @Override

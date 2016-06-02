@@ -46,7 +46,8 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     @Override
     public void goToListSpeechesActivity(Context context,String selected){
         Intent intent=new Intent(context,ListSpeechesActivity.class);
-        ChapterPresenter chapterPresenter=new ChapterPresenterImpl(screenplay.getChapter(selected));
+        ChapterPresenter chapterPresenter=
+                new ChapterPresenterImpl(screenplay.getChapter(selected),screenplay.getCharacters());
         ListSpeechesActivity.setPresenter(chapterPresenter);
         context.startActivity(intent);
     }

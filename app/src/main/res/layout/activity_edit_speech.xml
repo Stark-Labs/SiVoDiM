@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modifica battuta"
-        android:id="@+id/AddSpeechButton"
+        android:id="@+id/editSpeechApplyButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="37dp" />

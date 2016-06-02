@@ -3,6 +3,7 @@ package starklabs.sivodim.Drama.Presenter;
 import android.content.Context;
 
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
+import starklabs.sivodim.Drama.Model.Chapter.Speech;
 import starklabs.sivodim.Drama.View.ListSpeechesInterface;
 
 /**
@@ -14,4 +15,5 @@ public interface ChapterPresenter {
     SpeechArrayAdapter getSpeeches(Context context);
     String getChapterTitle();
     void setActivity(ListSpeechesInterface listSpeechesInterface);
+    void goToEditSpeechActivity(Context context,Speech selected);
 }

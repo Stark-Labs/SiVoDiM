@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import starklabs.sivodim.Drama.Model.Chapter.Speech;
+import starklabs.sivodim.Drama.Model.Character.Character;
+import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.R;
 
 /**
@@ -83,8 +85,14 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         speechText.setTextColor(color);
         speechText.setBackgroundDrawable(drawable);
         speechText.setText(speechObj.getText());
-        if(speechObj.getCharacter()!=null)
-            speechAvatar.setImageBitmap(speechObj.getCharacter().getAvatar().getImage());
+        Character character=speechObj.getCharacter();
+        if(character!=null){
+            Avatar avatar=character.getAvatar();
+            if(avatar!=null && avatar.getImage()!=null)
+                speechAvatar.setImageBitmap(speechObj.getCharacter().getAvatar().getImage());
+            else
+                speechAvatar.setImageResource(R.mipmap.undefined_user);
+        }
         return row;
     }
 }

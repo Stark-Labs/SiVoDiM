@@ -70,6 +70,8 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
         speechListView=(ListView) findViewById(R.id.speechesListView);
         speechListAdapter=chapterPresenter.getSpeeches(this);
         speechListView.setAdapter(speechListAdapter);
+        if(speechListAdapter.getCount()==0)
+            Toast.makeText(this,"Il capitolo è vuoto",Toast.LENGTH_LONG).show();
 
         speechListView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         speechListView.setAdapter(speechListAdapter);
@@ -87,9 +89,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Speech selected=(Speech) parent.getItemAtPosition(position);
-                Intent intent=new Intent(view.getContext(),EditSpeechActivity.class);
-                intent.putExtra("SpeechSelected",selected.getText());
-                startActivity(intent);
+                chapterPresenter.goToEditSpeechActivity(view.getContext(),selected);
                 return false;
             }
         });
@@ -102,7 +102,8 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                Intent intent=new Intent(this,ListChapterActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

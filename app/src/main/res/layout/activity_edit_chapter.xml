@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Conferma modifiche"
-            android:id="@+id/button8"
+            android:id="@+id/editChapterApplyButton"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp" />
 
