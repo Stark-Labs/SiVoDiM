@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -189,14 +190,22 @@ public class XMLParser {
     }
 
     public void saveXML(File file, Screenplay screenplay) {
+        System.out.println("FUNZIONE SAVE");
         if (screenplay != null) {
+            if(!file.exists())
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             Document doc;
             // instance of document from a file
             try {
-                doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+                doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 
                 // create root element "screenplay"
                 Element screenplayElem = doc.createElement("screenplay");
+                doc.appendChild(screenplayElem);
                 screenplayElem.setAttribute("title",screenplay.getTitle());
 
                 // create element "character", father of all "character" elements
@@ -231,7 +240,7 @@ public class XMLParser {
                     Iterator<Speech> speechIterator = chapter.getSpeechIterator();
                     while(speechIterator.hasNext()) {
                         Speech speech = speechIterator.next();
-
+                        if(speech!=null){
                         //create element "speech" in a loop
                         Element speechElem = doc.createElement("speech");
                         speechElem.setAttribute("character", speech.getCharacter().getName());
@@ -243,6 +252,7 @@ public class XMLParser {
 
                         // append "speech" to "chapter"
                         chapterElem.appendChild(speechElem);
+                        }
                     }
                     // append "chapter" to "chapters"
                     chaptersElem.appendChild(chapterElem);
@@ -256,19 +266,17 @@ public class XMLParser {
                     //transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "roles.dtd");
                     transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
+
                     // send DOM to file
                     transformer.transform(new DOMSource(doc),
                             new StreamResult(new FileOutputStream(file)));
+
 
                 } catch (TransformerException te) {
                     System.out.println(te.getMessage());
                 } catch (IOException ioe) {
                     System.out.println(ioe.getMessage());
                 }
-            } catch (SAXException e) {
-                eDebug(e.toString());
-            } catch (IOException e) {
-                eDebug(e.toString());
             } catch (ParserConfigurationException e) {
                 eDebug(e.toString());
             } catch (FactoryConfigurationError e) {

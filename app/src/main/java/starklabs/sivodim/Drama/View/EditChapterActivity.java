@@ -50,7 +50,7 @@ public class EditChapterActivity extends AppCompatActivity implements EditChapte
             public void onClick(View v) {
                 chapterPresenter.setChapterTitle(chapterName.getText().toString());
                 //set other properties..
-                Intent intent=new Intent(v.getContext(),ListSpeechesActivity.class);
+                Intent intent=new Intent(v.getContext(),ListChapterActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +61,7 @@ public class EditChapterActivity extends AppCompatActivity implements EditChapte
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                Intent intent=new Intent(this,ListSpeechesActivity.class);
+                Intent intent=new Intent(this,ListChapterActivity.class);
                 startActivity(intent);
                 return true;
             default:

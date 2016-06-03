@@ -120,7 +120,7 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         switch (item.getItemId()){
             case R.id.saveMenu:
                 screenplayPresenter.save(screenplayPresenter.getScreenplay(), this.getApplicationContext());
-                Toast.makeText(this,"Salva",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Salvato",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportMenu:
                 //---- test FFmpeg -----------------------------------------------------------
