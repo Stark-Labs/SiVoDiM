@@ -1,6 +1,7 @@
 package starklabs.sivodim.Drama.View;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -36,22 +37,26 @@ public class NewScreenplayActivity extends AppCompatActivity implements NewScree
         this.spinnerImportCharacters = (Spinner) findViewById(R.id.spinnerImportCharacters);
 
         // onClick for Button
-        this.buttonCreateProject.setOnClickListener(NewScreenplayActivity.this);
+        this.buttonCreateProject.setOnClickListener(this);
 
     }
 
     public void onClick(View v) {
         String title = editTextProjectName.getText().toString();
-        screenplayPresenter.newScreenplay(title);
-        String selected=(String) spinnerImportCharacters.getSelectedItem();
-        screenplayPresenter.importCharacter(selected, this);
+        screenplayPresenter.newScreenplay(title,this);
+        //String selected=(String) spinnerImportCharacters.getSelectedItem();
+        //screenplayPresenter.importCharacter(selected, this);
+
+        Intent homeActivityIntent=new Intent(this,HomeActivity.class);
+        startActivity(homeActivityIntent);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                Intent intent=new Intent(this,HomeActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

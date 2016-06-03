@@ -72,14 +72,15 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),NewChapterActivity.class);
-                startActivity(intent);
+                screenplayPresenter.goToNewChapterActivity(view.getContext());
             }
         });
 
         chapterListView=(ListView) findViewById(R.id.listChapterView);
         chapterListAdapter=screenplayPresenter.getTitlesAdapter(this,title+".scrpl");
         chapterListView.setAdapter(chapterListAdapter);
+        if(chapterListView.getCount()==0)
+            Toast.makeText(this,"Premi sul + per aggiungere capitoli",Toast.LENGTH_LONG).show();
 
         chapterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

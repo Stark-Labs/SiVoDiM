@@ -110,10 +110,7 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         context.startActivity(editChapterIntent);
     }
 
-    @Override
-    public void newChapter() {
 
-    }
 
     @Override
     public void setChapterTitle(String title){

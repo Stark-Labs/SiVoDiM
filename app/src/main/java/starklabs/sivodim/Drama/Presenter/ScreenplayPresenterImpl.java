@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
+import starklabs.sivodim.Drama.Model.Chapter.ChapterImpl;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Screenplay.Screenplay;
 import starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl;
@@ -17,6 +18,8 @@ import starklabs.sivodim.Drama.View.ListChapterActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
 import starklabs.sivodim.Drama.View.ListCharacterActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesActivity;
+import starklabs.sivodim.Drama.View.NewChapterActivity;
+import starklabs.sivodim.Drama.View.NewChapterInterface;
 import starklabs.sivodim.Drama.View.NewScreenplayInterface;
 import starklabs.sivodim.R;
 
@@ -27,6 +30,7 @@ import static starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl.saveScreen
  */
 public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     NewScreenplayInterface newScreenplayInterface;
+    NewChapterInterface newChapterInterface;
     Screenplay screenplay;
     // to share and export algorithms
     ListChapterInterface listChapterInterface;
@@ -41,6 +45,10 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
 
     public ScreenplayPresenterImpl(NewScreenplayInterface newScreenplayInterface){
         this.newScreenplayInterface=newScreenplayInterface;
+    }
+
+    public ScreenplayPresenterImpl(NewChapterInterface newChapterInterface){
+        this.newChapterInterface=newChapterInterface;
     }
 
     public ScreenplayPresenterImpl(ListChapterInterface listChapterActivity){
@@ -76,10 +84,21 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         context.startActivity(editChapterIntent);
     }
 
+    @Override
+    public void goToNewChapterActivity(Context context){
+        Intent newChapterIntent=new Intent(context,NewChapterActivity.class);
+        NewChapterActivity.setPresenter(this);
+        context.startActivity(newChapterIntent);
+    }
 
     @Override
     public void setActivity(ListChapterInterface listChapterInterface){
         this.listChapterInterface=listChapterInterface;
+    }
+
+    @Override
+    public void setActivity(NewChapterInterface newChapterInterface){
+        this.newChapterInterface=newChapterInterface;
     }
 
     @Override
@@ -93,9 +112,10 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     }
 
     @Override
-    public void newScreenplay(String title) {
+    public void newScreenplay(String title,Context context) {
         this.screenplay=new ScreenplayImpl(title);
         // manca il save
+        save(screenplay,context);
     }
 
     @Override
@@ -106,6 +126,13 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     @Override
     public void importCharacter(String screenplay,Context context){
         this.screenplay.importCharacters(ScreenplayImpl.loadScreenplay(screenplay,context));
+    }
+
+    @Override
+    public void newChapter(String title) {
+        Chapter chapter=new ChapterImpl.ChapterBuilder()
+                .setTitle(title).build();
+        screenplay.addChapter(chapter);
     }
 
     @Override

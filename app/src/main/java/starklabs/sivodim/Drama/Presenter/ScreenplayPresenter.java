@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Screenplay.Screenplay;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
+import starklabs.sivodim.Drama.View.NewChapterInterface;
 
 /**
  * Created by io on 25/05/2016.
@@ -13,7 +14,8 @@ import starklabs.sivodim.Drama.View.ListChapterInterface;
 public interface ScreenplayPresenter {
     void export();
     void share();
-    void newScreenplay(String title);
+    void newChapter(String title);
+    void newScreenplay(String title,Context context);
     // check how drag and drop works for orderChapter implementation
     void orderChapter();
     boolean save(Screenplay screenplay, Context context);
@@ -23,7 +25,9 @@ public interface ScreenplayPresenter {
     String getScreenplayTitle();
     Screenplay getScreenplay();
     void setActivity(ListChapterInterface listChapterInterface);
+    void setActivity(NewChapterInterface newChapterInterface);
     void goToListSpeechesActivity(Context context,String selected);
     void goToListCharactersActivity(Context context);
     void goToEditChapterActivity(Context context,String selected);
+    void goToNewChapterActivity(Context context);
 }
