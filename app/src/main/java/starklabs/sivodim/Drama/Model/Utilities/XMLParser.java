@@ -263,7 +263,6 @@ public class XMLParser {
                     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                     transformer.setOutputProperty(OutputKeys.METHOD, "xml");
                     transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-                    //transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "roles.dtd");
                     transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 
