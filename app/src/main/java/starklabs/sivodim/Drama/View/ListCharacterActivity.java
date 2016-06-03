@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Presenter.ChapterPresenterImpl;
 import starklabs.sivodim.Drama.Presenter.CharacterArrayAdapter;
 import starklabs.sivodim.Drama.Presenter.CharacterPresenter;
@@ -55,6 +57,16 @@ public class ListCharacterActivity extends AppCompatActivity implements ListChar
             public void onClick(View view) {
                 Intent newCharacterIntent=new Intent(view.getContext(),NewCharacterActivity.class);
                 startActivity(newCharacterIntent);
+            }
+        });
+
+
+        characterListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Character selected=(Character) parent.getItemAtPosition(position);
+                characterPresenter.goToEditCharacterActivity(view.getContext(),selected);
+                return false;
             }
         });
     }

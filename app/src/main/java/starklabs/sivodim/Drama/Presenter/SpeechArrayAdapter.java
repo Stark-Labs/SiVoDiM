@@ -26,6 +26,7 @@ public class SpeechArrayAdapter extends ArrayAdapter {
     private Context context;
     private TextView speechText;
     private ImageView speechAvatar;
+    private TextView characterName;
 
     public SpeechArrayAdapter(Context context, int resource) {
         super(context, resource);
@@ -53,6 +54,7 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         row = inflater.inflate(R.layout.speech_layout, parent, false);
         speechText = (TextView) row.findViewById(R.id.speechText);
         speechAvatar=(ImageView)row.findViewById(R.id.speechAvatar);
+        characterName=(TextView)row.findViewById(R.id.characterName);
         Drawable drawable;
         int color=Color.BLACK;
         switch (speechObj.getEmotion()){
@@ -87,6 +89,7 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         speechText.setText(speechObj.getText());
         Character character=speechObj.getCharacter();
         if(character!=null){
+            characterName.setText(character.getName());
             Avatar avatar=character.getAvatar();
             if(avatar!=null && avatar.getImage()!=null)
                 speechAvatar.setImageBitmap(speechObj.getCharacter().getAvatar().getImage());

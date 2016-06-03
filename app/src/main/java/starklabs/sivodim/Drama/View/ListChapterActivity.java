@@ -89,6 +89,15 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
             }
         });
 
+        chapterListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String selected=(String) parent.getItemAtPosition(position);
+                screenplayPresenter.goToEditChapterActivity(view.getContext(),selected);
+                return true;
+            }
+        });
+
         toolbar.setOnMenuItemClickListener(this);
 
     }
@@ -116,13 +125,14 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 //---- test FFmpeg -----------------------------------------------------------
                 File f=new File(getExternalStorageDirectory(),"pic004.png");
                 System.out.println(f.getAbsolutePath());
-                File file=new File(getFilesDir(),"Airbag.mp3");
-                File file2=new File(getFilesDir(),"concatenation.wav");
+                File file=new File(getFilesDir(),"track.mp3");
+                File file2=new File(getFilesDir(),"provafile.wav");
+                File file3=new File(getFilesDir(),"provafilefr.wav");
                 File dest=new File(getFilesDir(),"parzial.wav");
                 File dest2=new File(getFilesDir(),"mergedAudio.wav");
                 AudioConcatenator am=new AudioConcatenator(this,dest);
                 am.addFile(file2);
-                am.addFile(file2);
+                am.addFile(file3);
                 AudioMixer aam=new AudioMixer(this,dest,file,dest2);
                 File dest3=new File(getFilesDir(),"export.mp3");
                 Mp3Converter mp=new Mp3Converter(this,dest2,dest3);

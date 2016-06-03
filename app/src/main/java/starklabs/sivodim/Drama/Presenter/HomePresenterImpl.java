@@ -58,9 +58,9 @@ public class HomePresenterImpl implements HomePresenter {
 
     @Override
     public ArrayAdapter<String> getTitlesAdapter(Context context){
-        if(titlesAdapter==null){
+        //if(titlesAdapter==null){
             titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadScreenplayTitles(context));
-        }
+        //}
         return titlesAdapter;
     }
 

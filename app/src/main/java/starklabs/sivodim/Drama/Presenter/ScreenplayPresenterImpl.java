@@ -11,6 +11,7 @@ import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Screenplay.Screenplay;
 import starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl;
+import starklabs.sivodim.Drama.View.EditChapterActivity;
 import starklabs.sivodim.Drama.View.HomeInterface;
 import starklabs.sivodim.Drama.View.ListChapterActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
@@ -59,6 +60,15 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         CharacterPresenter characterPresenter=new CharacterPresenterImpl(screenplay.getCharacters());
         ListCharacterActivity.setPresenter(characterPresenter);
         context.startActivity(listCharacterIntent);
+    }
+
+    @Override
+    public void goToEditChapterActivity(Context context,String selected){
+        Intent editChapterIntent=new Intent(context,EditChapterActivity.class);
+        ChapterPresenter chapterPresenter=
+                new ChapterPresenterImpl(screenplay.getChapter(selected),screenplay.getCharacters());
+        EditChapterActivity.setPresenter(chapterPresenter);
+        context.startActivity(editChapterIntent);
     }
 
 
@@ -118,7 +128,7 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
 
     @Override
     public ArrayAdapter<String> getTitlesAdapter(Context context,String screenplay){
-        if(titlesAdapter==null)
+       // if(titlesAdapter==null)
             titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadChapterTitles(screenplay, context));
         return titlesAdapter;
     }

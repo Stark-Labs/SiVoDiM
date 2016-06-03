@@ -114,9 +114,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.editChapterMenu:
-                Intent editCharacterIntent=new Intent(this,EditChapterActivity.class);
-                editCharacterIntent.putExtra("ChapterToEdit","Nome capitolo.."/*chapterPresenter.getChapter().getTitle()*/);
-                startActivity(editCharacterIntent);
+                chapterPresenter.goToEditChapterActivity(this);
                 break;
             case R.id.listCharacterMenu:
                 chapterPresenter.goToListCharactersActivity(this);

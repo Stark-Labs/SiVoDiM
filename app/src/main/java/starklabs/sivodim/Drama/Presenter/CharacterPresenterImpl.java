@@ -1,12 +1,15 @@
 package starklabs.sivodim.Drama.Presenter;
 
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.Iterator;
 
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Screenplay.CharacterContainer;
+import starklabs.sivodim.Drama.View.EditCharacterActivity;
 import starklabs.sivodim.Drama.View.EditCharacterInterface;
+import starklabs.sivodim.Drama.View.EditSpeechActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
 import starklabs.sivodim.Drama.View.ListCharacterInterface;
 import starklabs.sivodim.Drama.View.NewCharacterActivity;
@@ -45,6 +48,11 @@ public class CharacterPresenterImpl implements CharacterPresenter {
     }
 
     @Override
+    public void setActivity(EditCharacterInterface editCharacterInterface){
+        this.editCharacterInterface=editCharacterInterface;
+    }
+
+    @Override
     public CharacterArrayAdapter getCharacterArrayAdapter(Context context){
         CharacterArrayAdapter characterArrayAdapter=
                 new CharacterArrayAdapter(context, R.layout.show_character_layout);
@@ -53,6 +61,14 @@ public class CharacterPresenterImpl implements CharacterPresenter {
             characterArrayAdapter.add(characterIterator.next());
         }
         return characterArrayAdapter;
+    }
+
+    @Override
+    public void goToEditCharacterActivity(Context context,Character selected){
+        Intent intent=new Intent(context,EditCharacterActivity.class);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(selected);
+        EditCharacterActivity.setPresenter(characterPresenter);
+        context.startActivity(intent);
     }
 
     @Override

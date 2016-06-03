@@ -15,6 +15,7 @@ import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Character.CharacterImpl;
 import starklabs.sivodim.Drama.Model.Screenplay.CharacterContainer;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
+import starklabs.sivodim.Drama.View.EditChapterActivity;
 import starklabs.sivodim.Drama.View.EditChapterInterface;
 import starklabs.sivodim.Drama.View.EditSpeechActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
@@ -64,6 +65,11 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         this.listSpeechesInterface=listSpeechesInterface;
     }
 
+    @Override
+    public void setActivity(EditChapterInterface editChapterInterface){
+        this.editChapterInterface=editChapterInterface;
+    }
+
     public void loadSpeeches(Context context){
         speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);
         //load speeches
@@ -75,9 +81,9 @@ public class ChapterPresenterImpl implements ChapterPresenter {
 
     @Override
     public SpeechArrayAdapter getSpeeches(Context context){
-        if(speechArrayAdapter==null){
+        //if(speechArrayAdapter==null){
             loadSpeeches(context);
-        }
+        //}
         return speechArrayAdapter;
     }
 
@@ -98,8 +104,20 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     }
 
     @Override
+    public void goToEditChapterActivity(Context context){
+        Intent editChapterIntent=new Intent(context,EditChapterActivity.class);
+        EditChapterActivity.setPresenter(this);
+        context.startActivity(editChapterIntent);
+    }
+
+    @Override
     public void newChapter() {
 
+    }
+
+    @Override
+    public void setChapterTitle(String title){
+        chapter.setTitle(title);
     }
 
     @Override
