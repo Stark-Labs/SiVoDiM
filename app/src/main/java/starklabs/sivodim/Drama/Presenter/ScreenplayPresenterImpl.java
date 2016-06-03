@@ -20,6 +20,8 @@ import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.NewScreenplayInterface;
 import starklabs.sivodim.R;
 
+import static starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl.saveScreenplay;
+
 /**
  * Created by io on 25/05/2016.
  */
@@ -44,6 +46,9 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     public ScreenplayPresenterImpl(ListChapterInterface listChapterActivity){
         this.listChapterInterface=listChapterActivity;
     }
+
+    @Override
+    public Screenplay getScreenplay() { return this.screenplay; }
 
     @Override
     public void goToListSpeechesActivity(Context context,String selected){
@@ -90,7 +95,7 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     @Override
     public void newScreenplay(String title) {
         this.screenplay=new ScreenplayImpl(title);
-        save();
+        // manca il save
     }
 
     @Override
@@ -108,9 +113,9 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
 
     }
 
-    private Vector<String> loadChapterTitles(String screenplay, Context context){
+    private Vector<String> loadChapterTitles(String screenplayTitle, Context context){
         if(this.screenplay==null){
-            this.screenplay=ScreenplayImpl.loadScreenplay(screenplay, context);
+            this.screenplay=ScreenplayImpl.loadScreenplay(screenplayTitle, context);
         }
         Iterator<Chapter> chapterIterator=this.screenplay.getChapterIterator();
         Vector<String> result=new Vector<>();
@@ -119,6 +124,12 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
             result.add(chapter.getTitle());
         }
         return result;
+    }
+
+    @Override
+    public boolean save(Screenplay screenplay, Context context){
+        saveScreenplay(screenplay, context);
+        return false;
     }
 
     @Override
@@ -131,11 +142,5 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
        // if(titlesAdapter==null)
             titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadChapterTitles(screenplay, context));
         return titlesAdapter;
-    }
-
-    @Override
-    public boolean save(){
-
-        return false;
     }
 }

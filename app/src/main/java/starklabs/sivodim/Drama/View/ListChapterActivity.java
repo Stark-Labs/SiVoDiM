@@ -119,6 +119,7 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.saveMenu:
+                screenplayPresenter.save(screenplayPresenter.getScreenplay(), this.getApplicationContext());
                 Toast.makeText(this,"Salva",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportMenu:

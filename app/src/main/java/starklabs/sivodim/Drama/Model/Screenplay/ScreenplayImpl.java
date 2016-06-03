@@ -30,13 +30,27 @@ public class ScreenplayImpl implements Screenplay {
         characterContainer=new CharacterContainer();
     }
 
-    public static Screenplay loadScreenplay(String name, Context context){
+    public static Screenplay loadScreenplay(String screenplayTitle, Context context){
         File dir = context.getFilesDir();
-        File myFile = new File(dir,name);
-        System.out.println(myFile.getAbsolutePath());
+        File screenplayFile = new File(dir,screenplayTitle);
+
+        //debug
+        System.out.println(screenplayFile.getAbsolutePath());
+
         XMLParser xmlParser = new XMLParser();
-        xmlParser.parseXml(myFile);
+        xmlParser.parseXml(screenplayFile);
         return xmlParser.getParsedData();
+    }
+
+    public static void saveScreenplay(Screenplay screenplay, Context context) {
+        File dir = context.getFilesDir();
+        File screenplayFile = new File(dir,screenplay.getTitle()+".scrpl");
+
+        //debug
+        System.out.println(screenplayFile.getAbsolutePath());
+
+        XMLParser xmlParser = new XMLParser();
+        xmlParser.saveXML(screenplayFile, screenplay);
     }
 
     @Override
