@@ -10,7 +10,6 @@ import starklabs.sivodim.Drama.View.EditSpeechInterface;
  * Created by io on 25/05/2016.
  */
 public interface SpeechPresenter {
-    void newSpeech();
     String getSpeechText();
     String getSpeechEmotion();
     void setSpeechText(String text);

@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+import starklabs.sivodim.Drama.Model.Chapter.SpeechImpl;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.Presenter.CharacterPresenter;
@@ -67,14 +68,22 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
            editAvatar.setImageBitmap(avatar.getImage());
 
         editName.setText(character.getName());
-        //add voices....
+
+        editVoice.setAdapter(SpeechImpl.getVoices(this));
+        int position=0;
+        String voiceTag=character.getVoiceID();
+        for (int i=0;i<editVoice.getCount();i++){
+            if (editVoice.getItemAtPosition(i).equals(voiceTag))
+                position = i;
+        }
+        editVoice.setSelection(position);
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name=editName.getText().toString();
                 character.setName(name);
-                //set voice and avatar..
+                character.setVoice((String) editVoice.getSelectedItem());
                 Intent intent=new Intent(v.getContext(),ListCharacterActivity.class);
                 startActivity(intent);
             }

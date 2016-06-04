@@ -1,8 +1,15 @@
 package starklabs.sivodim.Drama.Model.Chapter;
 
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+import java.util.Iterator;
+import java.util.Vector;
+
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Utilities.SoundFx;
 import starklabs.sivodim.Drama.Model.Utilities.SpeechSound;
+import starklabs.sivodim.R;
 
 /**
  * Created by Riccardo Rizzo on 25/05/2016.
@@ -110,6 +117,30 @@ public class SpeechImpl implements Speech {
 
         private SpeechSound synthesis;
 
+    }
+
+    public static ArrayAdapter<String> getEmotions(Context context){
+        Vector<String> emotions = new Vector<String>();
+        //callback to retrieve emotions
+        emotions.add("HAPPINESS");
+        emotions.add("SADNESS");
+        emotions.add("ANGER");
+        emotions.add("FEAR");
+        emotions.add("DISGUST");
+        emotions.add("SURPRISE");
+        return new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item,emotions);
+    }
+
+    public static ArrayAdapter<String> getVoices(Context context){
+        Vector<String> emotions = new Vector<String>();
+        //callback to retrieve emotions
+        emotions.add("Voice1");
+        emotions.add("Voice2");
+        emotions.add("Voice3");
+        emotions.add("Voice4");
+        emotions.add("voice5");
+        emotions.add("Voice6");
+        return new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item,emotions);
     }
 
 

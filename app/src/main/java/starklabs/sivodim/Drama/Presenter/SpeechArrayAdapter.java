@@ -92,7 +92,7 @@ public class SpeechArrayAdapter extends ArrayAdapter {
             characterName.setText(character.getName());
             Avatar avatar=character.getAvatar();
             if(avatar!=null && avatar.getImage()!=null)
-                speechAvatar.setImageBitmap(speechObj.getCharacter().getAvatar().getImage());
+                speechAvatar.setImageBitmap(avatar.getImage());
             else
                 speechAvatar.setImageResource(R.mipmap.undefined_user);
         }

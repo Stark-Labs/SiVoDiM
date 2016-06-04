@@ -6,7 +6,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.ListIterator;
+import java.util.Vector;
 
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Chapter.Speech;
@@ -23,6 +25,9 @@ import starklabs.sivodim.Drama.View.ListCharacterActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesActivity;
 import starklabs.sivodim.Drama.View.ListSpeechesInterface;
 import starklabs.sivodim.Drama.View.NewChapterInterface;
+import starklabs.sivodim.Drama.View.NewCharacterActivity;
+import starklabs.sivodim.Drama.View.NewSpeechActivity;
+import starklabs.sivodim.Drama.View.NewSpeechInterface;
 import starklabs.sivodim.R;
 
 /**
@@ -35,6 +40,7 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     EditChapterInterface editChapterInterface;
     SpeechArrayAdapter speechArrayAdapter;
     CharacterContainer characterContainer;
+    NewSpeechInterface newSpeechInterface;
 
 
     public ChapterPresenterImpl(Chapter chapter,CharacterContainer characterContainer){
@@ -70,6 +76,11 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         this.editChapterInterface=editChapterInterface;
     }
 
+    @Override
+    public void setActivity(NewSpeechInterface newSpeechInterface){
+        this.newSpeechInterface=newSpeechInterface;
+    }
+
     public void loadSpeeches(Context context){
         speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);
         //load speeches
@@ -85,6 +96,16 @@ public class ChapterPresenterImpl implements ChapterPresenter {
             loadSpeeches(context);
         //}
         return speechArrayAdapter;
+    }
+
+    @Override
+    public ArrayAdapter<String> getCharactersAdapter(Context context){
+        Vector<String> charactersName = new Vector<String>();
+        Iterator<Character> characterIterator=characterContainer.iterator();
+        while (characterIterator.hasNext()){
+            charactersName.add(characterIterator.next().getName());
+        }
+         return new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item,charactersName);
     }
 
     @Override
@@ -110,11 +131,35 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         context.startActivity(editChapterIntent);
     }
 
+    @Override
+    public void goToNewCharacterActivity(Context context){
+        Intent intent=new Intent(context, NewCharacterActivity.class);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(characterContainer);
+        NewCharacterActivity.setPresenter(characterPresenter);
+        context.startActivity(intent);
+    }
 
+    @Override
+    public void goToNewSpeechActivity(Context context){
+        Intent intent=new Intent(context, NewSpeechActivity.class);
+        NewSpeechActivity.setPresenter(this);
+        context.startActivity(intent);
+    }
 
     @Override
     public void setChapterTitle(String title){
         chapter.setTitle(title);
+    }
+
+    @Override
+    public void newSpeech(String text,String chatacterName,String emotion) {
+        Speech speech=new SpeechImpl.SpeechBuilder()
+                .setText(text)
+                .setCharacter(characterContainer.getCharacterByName(chatacterName))
+                .setEmotion(emotion)
+                .build();
+        //add SoundFx
+        chapter.addSpeech(speech);
     }
 
     @Override

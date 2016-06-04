@@ -30,4 +30,5 @@ public interface ScreenplayPresenter {
     void goToListCharactersActivity(Context context);
     void goToEditChapterActivity(Context context,String selected);
     void goToNewChapterActivity(Context context);
+    void goToNewCharacterActivity(Context context);
 }
