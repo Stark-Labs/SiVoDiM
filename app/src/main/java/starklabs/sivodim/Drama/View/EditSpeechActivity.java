@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import starklabs.sivodim.Drama.Model.Chapter.Speech;
+import starklabs.sivodim.Drama.Model.Chapter.SpeechImpl;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Presenter.ChapterPresenterImpl;
 import starklabs.sivodim.Drama.Presenter.SpeechPresenter;
@@ -51,15 +52,7 @@ public class EditSpeechActivity extends AppCompatActivity implements EditSpeechI
 
         speechText.setText(speechPresenter.getSpeechText());
         //set emotion Spinner
-        List<String> em = new ArrayList<String>();
-        em.add("HAPPINESS");
-        em.add("SADESS");
-        em.add("ANGER");
-        em.add("SURPRISE");
-        em.add("DISGUST");
-        em.add("FEAR");
-        ArrayAdapter<String> emotionArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,em);
-        emotion.setAdapter(emotionArrayAdapter);
+        emotion.setAdapter(SpeechImpl.getEmotions(this));
         String emotionTag=speechPresenter.getSpeechEmotion();
         int position=0;
         for (int i=0;i<emotion.getCount();i++){

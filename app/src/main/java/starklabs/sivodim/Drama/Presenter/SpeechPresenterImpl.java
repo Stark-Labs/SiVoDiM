@@ -16,7 +16,6 @@ import starklabs.sivodim.Drama.View.NewSpeechInterface;
  * Created by io on 25/05/2016.
  */
 public class SpeechPresenterImpl implements SpeechPresenter {
-    NewSpeechInterface newSpeechInterface;
     Speech speech;
     CharacterContainer characterContainer;
     EditSpeechInterface editSpeechInterface;
@@ -31,18 +30,10 @@ public class SpeechPresenterImpl implements SpeechPresenter {
         this.editSpeechInterface=editSpeechActivity;
     }
 
-    public SpeechPresenterImpl(NewSpeechInterface newSpeechInterface){
-        this.newSpeechInterface=newSpeechInterface;
-    }
 
     @Override
     public void setActivity(EditSpeechInterface editSpeechInterface){
         this.editSpeechInterface=editSpeechInterface;
-    }
-
-    @Override
-    public void newSpeech() {
-
     }
 
     @Override

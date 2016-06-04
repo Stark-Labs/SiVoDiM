@@ -220,7 +220,9 @@ public class XMLParser {
                     Element characterElem = doc.createElement("character");
                     characterElem.setAttribute("name", character.getName());
                     characterElem.setAttribute("voice", character.getVoiceID());
-                    characterElem.setAttribute("avatar", character.getAvatar().getPath());
+                    Avatar avatar=character.getAvatar();
+                    if(avatar!=null)
+                        characterElem.setAttribute("avatar", avatar.getPath());
 
                     // append "character" to "characters"
                     charactersElem.appendChild(characterElem);

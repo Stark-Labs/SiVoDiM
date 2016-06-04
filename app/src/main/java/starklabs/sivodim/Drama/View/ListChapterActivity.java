@@ -157,8 +157,7 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 Toast.makeText(this,"Modifica",Toast.LENGTH_LONG).show();
                 break;
             case R.id.newCharacterMenu:
-                Intent newCharacterIntent=new Intent(this,NewCharacterActivity.class);
-                startActivity(newCharacterIntent);
+                screenplayPresenter.goToNewCharacterActivity(this);
                 break;
             case R.id.importCharactersMenu:
                 Toast.makeText(this,"Importa personaggio",Toast.LENGTH_LONG).show();

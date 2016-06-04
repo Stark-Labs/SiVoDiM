@@ -5,12 +5,16 @@ import android.content.Intent;
 
 import java.util.Iterator;
 
+import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
+import starklabs.sivodim.Drama.Model.Character.CharacterImpl;
 import starklabs.sivodim.Drama.Model.Screenplay.CharacterContainer;
+import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.View.EditCharacterActivity;
 import starklabs.sivodim.Drama.View.EditCharacterInterface;
 import starklabs.sivodim.Drama.View.EditSpeechActivity;
 import starklabs.sivodim.Drama.View.ListChapterInterface;
+import starklabs.sivodim.Drama.View.ListCharacterActivity;
 import starklabs.sivodim.Drama.View.ListCharacterInterface;
 import starklabs.sivodim.Drama.View.NewCharacterActivity;
 import starklabs.sivodim.Drama.View.NewCharacterInterface;
@@ -53,6 +57,11 @@ public class CharacterPresenterImpl implements CharacterPresenter {
     }
 
     @Override
+    public void setActivity(NewCharacterInterface newCharacterInterface){
+        this.characterInterface=newCharacterInterface;
+    }
+
+    @Override
     public CharacterArrayAdapter getCharacterArrayAdapter(Context context){
         CharacterArrayAdapter characterArrayAdapter=
                 new CharacterArrayAdapter(context, R.layout.show_character_layout);
@@ -72,8 +81,28 @@ public class CharacterPresenterImpl implements CharacterPresenter {
     }
 
     @Override
-    public void newCharacter() {
+    public void goToNewCharacterActivity(Context context){
+        Intent intent=new Intent(context,NewCharacterActivity.class);
+        NewCharacterActivity.setPresenter(this);
+        context.startActivity(intent);
+    }
 
+    @Override
+    public void goToListCharacterActivity(Context context){
+        Intent intent=new Intent(context,ListCharacterActivity.class);
+        ListCharacterActivity.setPresenter(this);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void newCharacter(String name, String voice, Avatar avatar) {
+        Character character=new CharacterImpl.CharacterBuilder()
+                .setName(name)
+                .setVoice(voice)
+                .build();
+        if(avatar!=null)
+            character.setAvatar(avatar);
+        characterContainer.addCharacter(character);
     }
 
     @Override

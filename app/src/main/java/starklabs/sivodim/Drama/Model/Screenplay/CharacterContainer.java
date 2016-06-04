@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
 
 /**
@@ -47,5 +48,19 @@ public class CharacterContainer{
 
     public void removeCharacter(Character character){
         characters.remove(character);
+    }
+
+    public Character getCharacterByName(String name){
+        Character character=null;
+        Iterator<Character> characterIterator=iterator();
+        boolean stop=false;
+        while (!stop && characterIterator.hasNext()){
+            Character c=characterIterator.next();
+            if(c.getName().equals(name)){
+                character=c;
+                stop=true;
+            }
+        }
+        return character;
     }
 }

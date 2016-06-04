@@ -62,8 +62,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),NewSpeechActivity.class);
-                startActivity(intent);
+                chapterPresenter.goToNewSpeechActivity(view.getContext());
             }
         });
 
@@ -120,8 +119,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
                 chapterPresenter.goToListCharactersActivity(this);
                 break;
             case R.id.newCharacterMenu:
-                Intent newCharacterIntent=new Intent(this,NewCharacterActivity.class);
-                startActivity(newCharacterIntent);
+                chapterPresenter.goToNewCharacterActivity(this);
                 break;
         }
         return false;
