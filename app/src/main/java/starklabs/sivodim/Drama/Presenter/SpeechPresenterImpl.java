@@ -13,12 +13,15 @@ import starklabs.sivodim.Drama.View.EditSpeechInterface;
 import starklabs.sivodim.Drama.View.NewSpeechInterface;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Francesco Bizzaro on 25/05/2016.
  */
 public class SpeechPresenterImpl implements SpeechPresenter {
     Speech speech;
     CharacterContainer characterContainer;
     EditSpeechInterface editSpeechInterface;
+
+
+    // ----------------------------- CONSTRUCTORS ----------------------------------------------
 
     public SpeechPresenterImpl(Speech speech,CharacterContainer characterContainer){
         this.speech=speech;
@@ -31,10 +34,15 @@ public class SpeechPresenterImpl implements SpeechPresenter {
     }
 
 
+    // ----------------------------- ACTIVITY ----------------------------------------------
+
     @Override
     public void setActivity(EditSpeechInterface editSpeechInterface){
         this.editSpeechInterface=editSpeechInterface;
     }
+
+
+    // ----------------------------- GETTER ----------------------------------------------
 
     @Override
     public String getSpeechText() {
@@ -45,6 +53,19 @@ public class SpeechPresenterImpl implements SpeechPresenter {
     public String getSpeechEmotion(){
         return speech.getEmotion();
     }
+
+    @Override
+    public Iterator<Character> getScreenplayCharacters(){
+        return characterContainer.iterator();
+    }
+
+    @Override
+    public Character getSpeechCharacter(){
+        return speech.getCharacter();
+    }
+
+
+    // ----------------------------- SETTER ----------------------------------------------
 
     @Override
     public void setSpeechText(String text){
@@ -59,15 +80,5 @@ public class SpeechPresenterImpl implements SpeechPresenter {
     @Override
     public void setSpeechCharacter(Character character){
         speech.setCharacter(character);
-    }
-
-    @Override
-    public Iterator<Character> getScreenplayCharacters(){
-        return characterContainer.iterator();
-    }
-
-    @Override
-    public Character getSpeechCharacter(){
-        return speech.getCharacter();
     }
 }

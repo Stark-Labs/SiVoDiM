@@ -21,7 +21,7 @@ import starklabs.sivodim.Drama.View.NewCharacterInterface;
 import starklabs.sivodim.R;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Francesco Bizzaro on 25/05/2016.
  */
 public class CharacterPresenterImpl implements CharacterPresenter {
     CharacterContainer characterContainer;
@@ -29,6 +29,8 @@ public class CharacterPresenterImpl implements CharacterPresenter {
     NewCharacterInterface characterInterface;
     ListCharacterInterface listCharacterInterface;
     EditCharacterInterface editCharacterInterface;
+
+    // ----------------------------- CONSTRUCTORS -------------------------------------------
 
     public CharacterPresenterImpl(CharacterContainer characterContainer){
         this.characterContainer=characterContainer;
@@ -46,6 +48,9 @@ public class CharacterPresenterImpl implements CharacterPresenter {
         this.listCharacterInterface=listCharacterInterface;
     }
 
+
+    // ----------------------------- ACTIVITY ----------------------------------------------
+
     @Override
     public void setActivity(ListCharacterInterface listCharacterInterface){
         this.listCharacterInterface=listCharacterInterface;
@@ -61,6 +66,9 @@ public class CharacterPresenterImpl implements CharacterPresenter {
         this.characterInterface=newCharacterInterface;
     }
 
+
+    // ----------------------------- GETTER ----------------------------------------------
+
     @Override
     public CharacterArrayAdapter getCharacterArrayAdapter(Context context){
         CharacterArrayAdapter characterArrayAdapter=
@@ -71,6 +79,29 @@ public class CharacterPresenterImpl implements CharacterPresenter {
         }
         return characterArrayAdapter;
     }
+
+    @Override
+    public Character getCharacter() {
+        return character;
+    }
+
+
+
+    // ----------------------------- UTILITIES ----------------------------------------------
+
+    @Override
+    public void newCharacter(String name, String voice, Avatar avatar) {
+        Character character=new CharacterImpl.CharacterBuilder()
+                .setName(name)
+                .setVoice(voice)
+                .build();
+        if(avatar!=null)//check if the avatar exists
+            character.setAvatar(avatar);
+        characterContainer.addCharacter(character);
+    }
+
+
+    // ----------------------------- MOVE ----------------------------------------------
 
     @Override
     public void goToEditCharacterActivity(Context context,Character selected){
@@ -94,19 +125,4 @@ public class CharacterPresenterImpl implements CharacterPresenter {
         context.startActivity(intent);
     }
 
-    @Override
-    public void newCharacter(String name, String voice, Avatar avatar) {
-        Character character=new CharacterImpl.CharacterBuilder()
-                .setName(name)
-                .setVoice(voice)
-                .build();
-        if(avatar!=null)
-            character.setAvatar(avatar);
-        characterContainer.addCharacter(character);
-    }
-
-    @Override
-    public Character getCharacter() {
-        return character;
-    }
 }

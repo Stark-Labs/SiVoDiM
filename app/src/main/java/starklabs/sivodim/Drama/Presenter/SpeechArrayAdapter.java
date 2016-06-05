@@ -19,33 +19,75 @@ import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.R;
 
 /**
- * Created by io on 31/05/2016.
+ * Created by Francesco Bizzaro on 31/05/2016.
  */
 public class SpeechArrayAdapter extends ArrayAdapter {
+    /**
+     * The list of speeches to show
+     */
     private List<Speech> speechList = new ArrayList<Speech>();
-    private Context context;
+
+    /**
+     * The TextView that will show the text of the speech
+     */
     private TextView speechText;
+
+    /**
+     * The ImageView that will show the avatar of the character who says the speech
+     */
     private ImageView speechAvatar;
+
+    /**
+     * The TextView that will show the name of the character who says the speech
+     */
     private TextView characterName;
 
+
+    /**
+     * Main constructor that initialize the list and the layout
+     * @param context
+     * @param resource The id of layout resource utilized
+     */
     public SpeechArrayAdapter(Context context, int resource) {
         super(context, resource);
-        this.context=context;
     }
 
+
+    /**
+     * To add a new Speech in the screen
+     * @param object
+     */
     public void add(Speech object) {
         speechList.add(object);
         super.add(object);
     }
 
+    /**
+     * To get the current number of speeches in the list
+     * @return
+     */
     public int getCount() {
         return this.speechList.size();
     }
 
+    /**
+     * To obtain a reference to the Speech in a specified position
+     * @param index The position inside the list
+     * @return
+     */
     public Speech getItem(int index) {
         return this.speechList.get(index);
     }
 
+
+    /**
+     * Create the view filling informations in the related fields. This method is automatically called
+     * during the graphics construction
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Speech speechObj = getItem(position);
@@ -83,7 +125,6 @@ public class SpeechArrayAdapter extends ArrayAdapter {
                 color=Color.WHITE;
                 break;
         }
-        //speechText.setBackground(drawable);
         speechText.setTextColor(color);
         speechText.setBackgroundDrawable(drawable);
         speechText.setText(speechObj.getText());

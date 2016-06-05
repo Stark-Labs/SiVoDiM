@@ -9,13 +9,19 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
 /**
- * Created by io on 28/05/2016.
+ * Created by Francesco Bizzaro on 28/05/2016.
  */
+
+
 public abstract class FfmpegConnector {
     private FFmpeg ffmpeg;
     private Context context;
     private Object lock=new Object();
 
+    /**
+     * Constructor that load {@link FFmpeg} binaries.
+     * @param context
+     */
     public FfmpegConnector(Context context){
         this.context=context;
         this.ffmpeg=FFmpeg.getInstance(context);
@@ -39,6 +45,11 @@ public abstract class FfmpegConnector {
         }
     }
 
+    /**
+     * Uses getCommand() abstract method to obtain the {@link FFmpeg} command (with all parameters)
+     * and executes that.
+     * @throws FFmpegCommandAlreadyRunningException
+     */
     public void exec() throws FFmpegCommandAlreadyRunningException {
         String cmd=getCommand();
         ffmpeg.execute(cmd.split(" "), new FFmpegExecuteResponseHandler() {
@@ -73,7 +84,6 @@ public abstract class FfmpegConnector {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //System.out.println("NOT WOOOOOOOOOOOOORK");
         }
         while (ffmpeg.isFFmpegCommandRunning()){
             try {
@@ -81,9 +91,12 @@ public abstract class FfmpegConnector {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //System.out.println("WOOOOOOOOOOOOORK");
         }
     }
 
+    /**
+     * Abstract method that give the {@link String} command for {@link FFmpeg}
+     * @return
+     */
     public abstract String getCommand();
 }
