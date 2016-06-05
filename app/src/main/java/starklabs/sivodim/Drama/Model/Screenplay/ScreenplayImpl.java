@@ -16,7 +16,7 @@ import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Utilities.XMLParser;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Francesco Bizzaro on 25/05/2016.
  */
 public class ScreenplayImpl implements Screenplay {
     private String title;

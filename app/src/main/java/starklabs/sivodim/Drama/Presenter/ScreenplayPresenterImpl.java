@@ -27,7 +27,7 @@ import starklabs.sivodim.R;
 import static starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl.saveScreenplay;
 
 /**
- * Created by io on 25/05/2016.
+ * Created by Francesco Bizzaro on 25/05/2016.
  */
 public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     NewScreenplayInterface newScreenplayInterface;
@@ -39,6 +39,8 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     //HomeInterface homeInterface;
     ArrayAdapter<String> titlesAdapter;
 
+
+    // ----------------------------- CONSTRUCTORS -------------------------------------------
 
     public ScreenplayPresenterImpl(Screenplay screenplay){
         this.screenplay=screenplay;
@@ -56,8 +58,39 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         this.listChapterInterface=listChapterActivity;
     }
 
+
+    // ----------------------------- ACTIVITY ----------------------------------------------
+
+    @Override
+    public void setActivity(ListChapterInterface listChapterInterface){
+        this.listChapterInterface=listChapterInterface;
+    }
+
+    @Override
+    public void setActivity(NewChapterInterface newChapterInterface){
+        this.newChapterInterface=newChapterInterface;
+    }
+
+
+    // ----------------------------- GETTER ----------------------------------------------
+
     @Override
     public Screenplay getScreenplay() { return this.screenplay; }
+
+    @Override
+    public String getScreenplayTitle(){
+        return screenplay.getTitle();
+    }
+
+    @Override
+    public ArrayAdapter<String> getTitlesAdapter(Context context,String screenplay){
+        titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,
+                loadChapterTitles(screenplay, context));
+        return titlesAdapter;
+    }
+
+
+    // ----------------------------- MOVE ----------------------------------------------
 
     @Override
     public void goToListSpeechesActivity(Context context,String selected){
@@ -100,15 +133,8 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         context.startActivity(intent);
     }
 
-    @Override
-    public void setActivity(ListChapterInterface listChapterInterface){
-        this.listChapterInterface=listChapterInterface;
-    }
 
-    @Override
-    public void setActivity(NewChapterInterface newChapterInterface){
-        this.newChapterInterface=newChapterInterface;
-    }
+    // ----------------------------- UTILITIES ----------------------------------------------
 
     @Override
     public void export() {
@@ -123,7 +149,6 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     @Override
     public void newScreenplay(String title,Context context) {
         this.screenplay=new ScreenplayImpl(title);
-        // manca il save
         save(screenplay,context);
     }
 
@@ -168,15 +193,4 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         return false;
     }
 
-    @Override
-    public String getScreenplayTitle(){
-        return screenplay.getTitle();
-    }
-
-    @Override
-    public ArrayAdapter<String> getTitlesAdapter(Context context,String screenplay){
-       // if(titlesAdapter==null)
-            titlesAdapter=new ArrayAdapter<String>(context, R.layout.screenplay_item,loadChapterTitles(screenplay, context));
-        return titlesAdapter;
-    }
 }
