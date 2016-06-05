@@ -39,6 +39,12 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     Chapter chapter;
     CharacterContainer characterContainer;
 
+    // name of the speech.. to pick up the project directory
+    String projectName;
+
+    //For election of speech in ListSpeechesActivity
+    int speechSelected=-1;
+
     /**
      *  custom ArrayAdapter which contain the list of speeches of the Chapter
      */
@@ -56,10 +62,12 @@ public class ChapterPresenterImpl implements ChapterPresenter {
      * Main constructor of {@link ChapterPresenterImpl}
      * @param chapter the chapter to edit
      * @param characterContainer connection to the list of {@link Character} of the {@link starklabs.sivodim.Drama.Model.Screenplay.Screenplay}
+     * @param projectName The name of the screenplay
      */
-    public ChapterPresenterImpl(Chapter chapter,CharacterContainer characterContainer){
+    public ChapterPresenterImpl(Chapter chapter,CharacterContainer characterContainer,String projectName){
         this.chapter=chapter;
         this.characterContainer=characterContainer;
+        this.projectName=projectName;
     }
 
     public ChapterPresenterImpl(ListSpeechesInterface listSpeechesInterface){
@@ -145,6 +153,15 @@ public class ChapterPresenterImpl implements ChapterPresenter {
         return new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item,charactersName);
     }
 
+    /**
+     * Gives the last selected speech in ListSpeechesActvity
+     * @return
+     */
+    @Override
+    public int getSpeechSelected(){
+        return speechSelected;
+    }
+
 
     // ----------------------------- SETTER ----------------------------------------------
 
@@ -155,6 +172,15 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     @Override
     public void setChapterTitle(String title){
         chapter.setTitle(title);
+    }
+
+    /**
+     * select the speech in ListSpeechesActivity
+     * @param index the index in SpeechArrayAdapter
+     */
+    @Override
+    public void setSpeechSelected(int index){
+        speechSelected=index;
     }
 
 
@@ -184,12 +210,19 @@ public class ChapterPresenterImpl implements ChapterPresenter {
      */
     public void loadSpeeches(Context context){
         speechArrayAdapter=new SpeechArrayAdapter(context, R.layout.speech_layout);
+        speechArrayAdapter.setSpeechSelected(speechSelected);
         //load speeches
         ListIterator<Speech> speechListIterator=chapter.getSpeechIterator();
         while (speechListIterator.hasNext()){
             speechArrayAdapter.add(speechListIterator.next());
         }
     }
+
+    @Override
+    public void deleteSpeech(Speech speech){
+        chapter.deleteSpeech(speech);
+    }
+
 
 
     // ----------------------------- MOVE ----------------------------------------------
@@ -214,7 +247,7 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     @Override
     public void goToListCharactersActivity(Context context){
         Intent listCharacterIntent=new Intent(context,ListCharacterActivity.class);
-        CharacterPresenter characterPresenter=new CharacterPresenterImpl(characterContainer);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(characterContainer,projectName);
         ListCharacterActivity.setPresenter(characterPresenter);
         context.startActivity(listCharacterIntent);
     }
@@ -237,7 +270,7 @@ public class ChapterPresenterImpl implements ChapterPresenter {
     @Override
     public void goToNewCharacterActivity(Context context){
         Intent intent=new Intent(context, NewCharacterActivity.class);
-        CharacterPresenter characterPresenter=new CharacterPresenterImpl(characterContainer);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(characterContainer,projectName);
         NewCharacterActivity.setPresenter(characterPresenter);
         context.startActivity(intent);
     }

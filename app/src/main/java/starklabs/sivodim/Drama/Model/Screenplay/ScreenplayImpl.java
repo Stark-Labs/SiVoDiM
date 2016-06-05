@@ -115,7 +115,7 @@ public class ScreenplayImpl implements Screenplay {
         Iterator<Character> iterator = characterContainer.iterator();
         while(iterator.hasNext()) {
             Character character = iterator.next();
-            if(character.getName() == name)
+            if(character.getName().equals(name))
                 return character;
         }
         return null;

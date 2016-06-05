@@ -86,12 +86,18 @@ public class NewCharacterActivity extends AppCompatActivity implements NewCharac
         newCharacterApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //insert check for not same names
                 String name=newCharacterName.getText().toString();
                 String voice=(String)newCharacterVoice.getSelectedItem();
                 Avatar avatar=null;
                 if(avatarPath!=null){
                     File avatarChoice=new File(avatarPath);
-                    File destination=new File(getFilesDir(),name+".png");
+                    File dir=new File(getFilesDir(),
+                            characterPresenter.getProjectName());
+                    if(!dir.exists()){
+                        dir.mkdir();
+                    }
+                    File destination=new File(dir,name+".png");
                     try {
                         copyFile(avatarChoice,destination);
                     } catch (IOException e) {

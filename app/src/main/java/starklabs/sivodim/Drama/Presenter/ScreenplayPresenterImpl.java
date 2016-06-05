@@ -96,7 +96,9 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     public void goToListSpeechesActivity(Context context,String selected){
         Intent intent=new Intent(context,ListSpeechesActivity.class);
         ChapterPresenter chapterPresenter=
-                new ChapterPresenterImpl(screenplay.getChapter(selected),screenplay.getCharacters());
+                new ChapterPresenterImpl(screenplay.getChapter(selected),
+                        screenplay.getCharacters(),
+                        screenplay.getTitle());
         ListSpeechesActivity.setPresenter(chapterPresenter);
         context.startActivity(intent);
     }
@@ -104,7 +106,8 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     @Override
     public void goToListCharactersActivity(Context context){
         Intent listCharacterIntent=new Intent(context,ListCharacterActivity.class);
-        CharacterPresenter characterPresenter=new CharacterPresenterImpl(screenplay.getCharacters());
+        CharacterPresenter characterPresenter=
+                new CharacterPresenterImpl(screenplay.getCharacters(),getScreenplayTitle());
         ListCharacterActivity.setPresenter(characterPresenter);
         context.startActivity(listCharacterIntent);
     }
@@ -113,7 +116,9 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     public void goToEditChapterActivity(Context context,String selected){
         Intent editChapterIntent=new Intent(context,EditChapterActivity.class);
         ChapterPresenter chapterPresenter=
-                new ChapterPresenterImpl(screenplay.getChapter(selected),screenplay.getCharacters());
+                new ChapterPresenterImpl(screenplay.getChapter(selected),
+                        screenplay.getCharacters(),
+                        screenplay.getTitle());
         EditChapterActivity.setPresenter(chapterPresenter);
         context.startActivity(editChapterIntent);
     }
@@ -128,7 +133,8 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     @Override
     public void goToNewCharacterActivity(Context context){
         Intent intent=new Intent(context, NewCharacterActivity.class);
-        CharacterPresenter characterPresenter=new CharacterPresenterImpl(screenplay.getCharacters());
+        CharacterPresenter characterPresenter=
+                new CharacterPresenterImpl(screenplay.getCharacters(),getScreenplayTitle());
         NewCharacterActivity.setPresenter(characterPresenter);
         context.startActivity(intent);
     }
