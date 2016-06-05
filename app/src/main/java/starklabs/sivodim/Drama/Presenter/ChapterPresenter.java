@@ -63,6 +63,11 @@ public interface ChapterPresenter {
      */
     String getChapterTitle();
 
+    /**
+     * Gives the last selected speech in ListSpeechesActvity
+     * @return
+     */
+    int getSpeechSelected();
 
     // ----------------------------- SETTER ------------------------------------------------
 
@@ -71,6 +76,12 @@ public interface ChapterPresenter {
      * @param title The title for the chapter
      */
     void setChapterTitle(String title);
+
+    /**
+     * select the speech in ListSpeechesActivity
+     * @param index the index in SpeechArrayAdapter
+     */
+    void setSpeechSelected(int index);
 
 
     // ----------------------------- UTILITIES ------------------------------------------------
@@ -82,6 +93,12 @@ public interface ChapterPresenter {
      * @param emotion the emotion that determine the synthesis parameters
      */
     void newSpeech(String text,String chatacterName,String emotion);
+
+    /**
+     * Delete a speech from the chapter if it is inside
+     * @param speech
+     */
+    void deleteSpeech(Speech speech);
 
     // ----------------------------- MOVE ------------------------------------------------
 

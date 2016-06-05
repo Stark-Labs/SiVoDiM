@@ -122,6 +122,7 @@ public class SpeechImpl implements Speech {
     public static ArrayAdapter<String> getEmotions(Context context){
         Vector<String> emotions = new Vector<String>();
         //callback to retrieve emotions
+        emotions.add("NONE");
         emotions.add("HAPPINESS");
         emotions.add("SADNESS");
         emotions.add("ANGER");

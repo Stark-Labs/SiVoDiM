@@ -50,6 +50,12 @@ public interface CharacterPresenter {
      */
     CharacterArrayAdapter getCharacterArrayAdapter(Context context);
 
+    /**
+     * Gives the name of the project (the title of the screenplay)
+     * @return
+     */
+    String getProjectName();
+
 
     // ----------------------------- UTILITIES ----------------------------------------------
 

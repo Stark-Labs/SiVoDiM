@@ -42,6 +42,7 @@ public class SpeechArrayAdapter extends ArrayAdapter {
      */
     private TextView characterName;
 
+    private int speechSelected=-1;
 
     /**
      * Main constructor that initialize the list and the layout
@@ -79,6 +80,9 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         return this.speechList.get(index);
     }
 
+    public void setSpeechSelected(int position){
+        speechSelected=position;
+    }
 
     /**
      * Create the view filling informations in the related fields. This method is automatically called
@@ -94,12 +98,18 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         View row = convertView;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         row = inflater.inflate(R.layout.speech_layout, parent, false);
+        if(position==speechSelected)
+            row.setBackgroundColor(Color.argb(150,200,200,220));
         speechText = (TextView) row.findViewById(R.id.speechText);
         speechAvatar=(ImageView)row.findViewById(R.id.speechAvatar);
         characterName=(TextView)row.findViewById(R.id.characterName);
         Drawable drawable;
         int color=Color.BLACK;
         switch (speechObj.getEmotion()){
+            case "NONE":
+                drawable=speechText.getResources().getDrawable(R.drawable.none);
+                color=Color.BLACK;
+                break;
             case "FEAR":
                 drawable=speechText.getResources().getDrawable(R.drawable.fear);
                 color=Color.WHITE;

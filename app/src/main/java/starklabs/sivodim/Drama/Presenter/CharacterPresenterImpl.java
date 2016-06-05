@@ -24,6 +24,7 @@ import starklabs.sivodim.R;
  * Created by Francesco Bizzaro on 25/05/2016.
  */
 public class CharacterPresenterImpl implements CharacterPresenter {
+    String projectName;
     CharacterContainer characterContainer;
     Character character;
     NewCharacterInterface characterInterface;
@@ -32,12 +33,14 @@ public class CharacterPresenterImpl implements CharacterPresenter {
 
     // ----------------------------- CONSTRUCTORS -------------------------------------------
 
-    public CharacterPresenterImpl(CharacterContainer characterContainer){
+    public CharacterPresenterImpl(CharacterContainer characterContainer,String projectName){
         this.characterContainer=characterContainer;
+        this.projectName=projectName;
     }
 
-    public CharacterPresenterImpl(Character character){
+    public CharacterPresenterImpl(Character character,String projectName){
         this.character=character;
+        this.projectName=projectName;
     }
 
     public CharacterPresenterImpl(NewCharacterInterface characterInterface){
@@ -85,6 +88,10 @@ public class CharacterPresenterImpl implements CharacterPresenter {
         return character;
     }
 
+    @Override
+    public String getProjectName(){
+        return projectName;
+    }
 
 
     // ----------------------------- UTILITIES ----------------------------------------------
@@ -106,7 +113,7 @@ public class CharacterPresenterImpl implements CharacterPresenter {
     @Override
     public void goToEditCharacterActivity(Context context,Character selected){
         Intent intent=new Intent(context,EditCharacterActivity.class);
-        CharacterPresenter characterPresenter=new CharacterPresenterImpl(selected);
+        CharacterPresenter characterPresenter=new CharacterPresenterImpl(selected,projectName);
         EditCharacterActivity.setPresenter(characterPresenter);
         context.startActivity(intent);
     }

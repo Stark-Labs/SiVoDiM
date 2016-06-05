@@ -56,10 +56,14 @@ public interface Chapter {
      */
     void addSpeech(Speech speech);//push_back
 
+    /**
+     * delete a Speech from the chapter
+     * @param speech a reference of the speech to delete
+     */
+    void deleteSpeech(Speech speech);
 
     // >>>>>>>>>>>>>>>> NOT YET IMPLEMENTED <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    void deleteSpeech(ListIterator<Speech> iterator);
     void deleteBackground();
     void deleteSoundtrack();
     void moveSpeech(ListIterator<Speech> iterator);

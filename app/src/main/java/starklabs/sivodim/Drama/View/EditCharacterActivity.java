@@ -36,6 +36,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
     private static CharacterPresenter characterPresenter;
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=2;
+    private String avatarPath=null;
     private ImageView editAvatar;
     private Spinner editVoice;
     private EditText editName;
@@ -64,6 +65,8 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
         character=characterPresenter.getCharacter();
 
         Avatar avatar=character.getAvatar();
+        if(avatar!=null)
+            avatarPath=avatar.getPath();
         if(avatar!=null && avatar.getImage()!=null)
            editAvatar.setImageBitmap(avatar.getImage());
 
@@ -84,6 +87,28 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
                 String name=editName.getText().toString();
                 character.setName(name);
                 character.setVoice((String) editVoice.getSelectedItem());
+
+                Avatar avatar=character.getAvatar();
+
+                if(avatarPath!=null && (character.getAvatar()==null ||
+                        avatarPath!=character.getAvatar().getPath())){
+                // check if avatar is changed
+
+                    File avatarChoice=new File(avatarPath);
+                    File dir=new File(getFilesDir(),
+                            characterPresenter.getProjectName());
+                    if(!dir.exists()){
+                        dir.mkdir();
+                    }
+                    File destination=new File(dir,name+".png");
+                    try {
+                        copyFile(avatarChoice,destination);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    avatar=new Avatar(destination.getAbsolutePath());
+                }
+                characterPresenter.getCharacter().setAvatar(avatar);
                 Intent intent=new Intent(v.getContext(),ListCharacterActivity.class);
                 startActivity(intent);
             }
@@ -199,16 +224,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
             cursor.close();
 
             editAvatar.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            File avatar=new File(picturePath);
-            File destination=new File(getFilesDir(),character.getName()+".png");
-            try {
-                copyFile(avatar,destination);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            characterPresenter.getCharacter()
-                    .setAvatar(new Avatar(destination.getAbsolutePath()));
+            avatarPath=picturePath;
 
 
         }

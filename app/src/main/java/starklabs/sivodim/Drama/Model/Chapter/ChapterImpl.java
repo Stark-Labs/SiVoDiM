@@ -115,8 +115,8 @@ public class ChapterImpl implements Chapter{
 
     // delete methods: delete existing parameters (speech, background, soundtrack)
     @Override
-    public void deleteSpeech(ListIterator<Speech> iterator) {
-
+    public void deleteSpeech(Speech speech) {
+        speeches.remove(speech);
     }
 
     @Override
