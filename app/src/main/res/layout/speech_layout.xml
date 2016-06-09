@@ -15,21 +15,15 @@
     <ImageView
         android:id="@+id/speechAvatar"
         android:scaleType="centerCrop"
-        android:layout_width="78dp"
-        android:layout_marginRight="3dp"
-        android:layout_height="78dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@mipmap/undefined_user" />
 
         <ImageView
-            android:layout_width="89dp"
-            android:layout_height="89dp"
-            android:layout_marginRight="3dp"
-            android:src="@mipmap/avatar_circle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/circle"
             android:scaleType="centerCrop"
-            android:layout_marginLeft="-6dp"
-            android:layout_alignStart="@id/speechAvatar"
             />
 
     </RelativeLayout>
@@ -37,7 +31,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,19 +42,19 @@
             android:id="@+id/characterName"
             android:layout_marginLeft="2dp"/>
 
-    <TextView
-        android:id="@+id/speechText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:text="Text"
-        android:textColor="#000"
-        android:textSize="17dp" />
+        <TextView
+            android:id="@+id/speechText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:text="Text"
+            android:textColor="#000"
+            android:textSize="17dp" />
 
     </LinearLayout>
 </LinearLayout>
