@@ -1,16 +1,11 @@
 package starklabs.sivodim.Drama.Presenter;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Chapter.Speech;
 import starklabs.sivodim.Drama.Model.Character.Character;
-import starklabs.sivodim.Drama.Model.Screenplay.CharacterContainer;
-import starklabs.sivodim.Drama.View.EditSpeechActivity;
+import starklabs.sivodim.Drama.Model.Character.CharacterContainer;
 import starklabs.sivodim.Drama.View.EditSpeechInterface;
-import starklabs.sivodim.Drama.View.NewSpeechInterface;
 
 /**
  * Created by Francesco Bizzaro on 25/05/2016.

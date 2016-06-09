@@ -30,14 +30,14 @@ import static starklabs.sivodim.Drama.Model.Screenplay.ScreenplayImpl.saveScreen
  * Created by Francesco Bizzaro on 25/05/2016.
  */
 public class ScreenplayPresenterImpl implements ScreenplayPresenter {
-    NewScreenplayInterface newScreenplayInterface;
-    NewChapterInterface newChapterInterface;
-    Screenplay screenplay;
+    private NewScreenplayInterface newScreenplayInterface;
+    private NewChapterInterface newChapterInterface;
+    private Screenplay screenplay;
     // to share and export algorithms
-    ListChapterInterface listChapterInterface;
+    private ListChapterInterface listChapterInterface;
     // to keep track of the last screenplay when on home (after back operation)
     //HomeInterface homeInterface;
-    ArrayAdapter<String> titlesAdapter;
+    private ArrayAdapter<String> titlesAdapter;
 
 
     // ----------------------------- CONSTRUCTORS -------------------------------------------
@@ -159,6 +159,16 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
     }
 
     @Override
+    public void moveUpChapter(String chapterTitle) {
+
+    }
+
+    @Override
+    public void moveDownChapter(String chapterTitle) {
+
+    }
+
+    @Override
     public void addCharacter(Character character){
         screenplay.addCharacter(character);
     }
@@ -175,10 +185,6 @@ public class ScreenplayPresenterImpl implements ScreenplayPresenter {
         screenplay.addChapter(chapter);
     }
 
-    @Override
-    public void orderChapter() {
-
-    }
 
     private Vector<String> loadChapterTitles(String screenplayTitle, Context context){
         if(this.screenplay==null){

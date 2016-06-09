@@ -5,6 +5,20 @@ package starklabs.sivodim.Drama.Model.Screenplay;
  */
 public class VideoExport extends ExportAlgorithm {
 
+    private AudioExport audioExport=new AudioExport();
+
+    private void exportAudio(){
+
+    }
+
+    private void concatenateImages(){
+
+    }
+
+    private void finalizeExport(){
+
+    }
+
     @Override
     public void export() {
 

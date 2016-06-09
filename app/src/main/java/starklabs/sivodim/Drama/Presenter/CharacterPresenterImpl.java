@@ -5,15 +5,12 @@ import android.content.Intent;
 
 import java.util.Iterator;
 
-import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
 import starklabs.sivodim.Drama.Model.Character.CharacterImpl;
-import starklabs.sivodim.Drama.Model.Screenplay.CharacterContainer;
+import starklabs.sivodim.Drama.Model.Character.CharacterContainer;
 import starklabs.sivodim.Drama.Model.Utilities.Avatar;
 import starklabs.sivodim.Drama.View.EditCharacterActivity;
 import starklabs.sivodim.Drama.View.EditCharacterInterface;
-import starklabs.sivodim.Drama.View.EditSpeechActivity;
-import starklabs.sivodim.Drama.View.ListChapterInterface;
 import starklabs.sivodim.Drama.View.ListCharacterActivity;
 import starklabs.sivodim.Drama.View.ListCharacterInterface;
 import starklabs.sivodim.Drama.View.NewCharacterActivity;

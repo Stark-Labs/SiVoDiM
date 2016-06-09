@@ -15,15 +15,12 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedExceptio
 
 public abstract class FfmpegConnector {
     private FFmpeg ffmpeg;
-    private Context context;
-    private Object lock=new Object();
 
     /**
      * Constructor that load {@link FFmpeg} binaries.
      * @param context
      */
     public FfmpegConnector(Context context){
-        this.context=context;
         this.ffmpeg=FFmpeg.getInstance(context);
         try {
             ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
