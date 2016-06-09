@@ -2,6 +2,7 @@ package starklabs.sivodim.Drama.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -151,6 +152,7 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 //---- end of test FFmpeg -----------------------------------------------------
                 break;
             case R.id.shareMenu:
+                onShare();
                 Toast.makeText(this,"Condividi",Toast.LENGTH_LONG).show();
                 break;
             case R.id.editMenu:
@@ -167,5 +169,14 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 break;
         }
         return false;
+    }
+
+    public void onShare() {
+        final Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+        String audioClipFileName="export.mp3";
+        shareIntent.setType("audio/mp3");
+        shareIntent.putExtra(android.content.Intent.EXTRA_STREAM, Uri.parse("file://"+"/sdcard/Uni/Swe/"+audioClipFileName));
+        shareIntent.setPackage("com.whatsapp");
+        startActivity(Intent.createChooser(shareIntent, "Share Audio Clip"));
     }
 }

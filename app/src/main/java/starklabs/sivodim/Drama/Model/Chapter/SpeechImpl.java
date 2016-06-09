@@ -106,11 +106,11 @@ public class SpeechImpl implements Speech {
     @Override
     public Character getCharacter() { return this.character; }
 
-    // send request to MIVOQ to retrieve audio preview
     @Override
-    public String toRequest() {
-        return null;
+    public void getAudio() {
+        //call Libraries
     }
+
 
     //Class for speech audio preview
     public class PlaySpeech{

@@ -59,6 +59,5 @@ public interface Speech extends Serializable {
      */
     Character getCharacter();
 
-    // send request to MIVOQ to retrieve audio preview
-    String toRequest();
+    void getAudio();
 }

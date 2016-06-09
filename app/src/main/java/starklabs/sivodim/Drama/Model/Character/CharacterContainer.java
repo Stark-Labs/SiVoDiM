@@ -1,14 +1,8 @@
-package starklabs.sivodim.Drama.Model.Screenplay;
-
-import android.widget.ArrayAdapter;
+package starklabs.sivodim.Drama.Model.Character;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.ListIterator;
-
-import starklabs.sivodim.Drama.Model.Chapter.Chapter;
-import starklabs.sivodim.Drama.Model.Character.Character;
 
 /**
  * Created by Francesco Bizzaro on 25/05/2016.
@@ -24,9 +18,9 @@ public class CharacterContainer{
         this.characters=characters;
     }
 
-    public void loadCharacters(){
+    /*public void loadCharacters(){
 
-    }
+    }*/
 
     public ArrayList<Character> cloneList() {
         ArrayList<Character> clone = new ArrayList<Character> (characters.size());

@@ -39,7 +39,6 @@ public interface ChapterBuilder {
     // ----------------------------- UTILITIES ----------------------------------------------
 
 
-    void loadSpeeches();//not used??
     Chapter getResult();//not used??
 
 }

@@ -34,8 +34,8 @@ import starklabs.sivodim.R;
 
 public class EditCharacterActivity extends AppCompatActivity implements EditCharacterInterface{
     private static CharacterPresenter characterPresenter;
-    private static final int RESULT_LOAD_IMAGE = 1;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=2;
+    private static final int resultLoadImage = 1;
+    private static final int myPermissionsRequestReadMemory=2;
     private String avatarPath=null;
     private ImageView editAvatar;
     private Spinner editVoice;
@@ -143,7 +143,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                        myPermissionsRequestReadMemory);
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
@@ -159,7 +159,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
                 Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-        startActivityForResult(i, RESULT_LOAD_IMAGE);
+        startActivityForResult(i, resultLoadImage);
 
 
     }
@@ -168,7 +168,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+            case myPermissionsRequestReadMemory: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -210,7 +210,7 @@ public class EditCharacterActivity extends AppCompatActivity implements EditChar
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+        if (requestCode == resultLoadImage && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
 //            grantUriPermission(null, selectedImage, Intent.FLAG_GRANT_READ_URI_PERMISSION);
             String[] filePathColumn = {MediaStore.Images.Media.DATA};

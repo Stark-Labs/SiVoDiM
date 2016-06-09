@@ -49,11 +49,6 @@ public class ChapterImpl implements Chapter{
             return this;
         }
 
-        // load speeches from sdcard
-        public ChapterBuilder loadSpeeches() {
-            // ...
-            return this;
-        }
 
         // return chapter built by builder
         public ChapterImpl build() {
@@ -82,8 +77,17 @@ public class ChapterImpl implements Chapter{
     }
 
     @Override
-    public void moveSpeech(ListIterator<Speech> iterator) {
+    public void moveUpSpeech(ListIterator<Speech> iterator) {
+        int position=iterator.previousIndex();
+        Speech speech=speeches.remove(position+1);
+        speeches.set(position,speech);
+    }
 
+    @Override
+    public void moveDownSpeech(ListIterator<Speech> iterator) {
+        int position=iterator.nextIndex();
+        Speech speech=speeches.remove(position+1);
+        speeches.set(position,speech);
     }
 
     @Override
@@ -121,11 +125,11 @@ public class ChapterImpl implements Chapter{
 
     @Override
     public void deleteBackground() {
-
+        background=null;
     }
 
     @Override
     public void deleteSoundtrack() {
-
+        soundtrack=null;
     }
 }

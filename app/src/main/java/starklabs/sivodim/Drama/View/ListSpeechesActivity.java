@@ -29,7 +29,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
     private static ChapterPresenter chapterPresenter;
     private ListView speechListView;
     private SpeechArrayAdapter speechListAdapter;
-    private LinearLayout MoveButtons;
+    private LinearLayout moveButtons;
     private FloatingActionButton upButton;
     private FloatingActionButton downButton;
     private FloatingActionButton doneButton;
@@ -78,7 +78,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
 
         speechListView=(ListView) findViewById(R.id.speechesListView);
         speechListAdapter=chapterPresenter.getSpeeches(this);
-        MoveButtons=(LinearLayout)findViewById(R.id.moveButtons);
+        moveButtons=(LinearLayout)findViewById(R.id.moveButtons);
         upButton=(FloatingActionButton)findViewById(R.id.upButton);
         downButton=(FloatingActionButton)findViewById(R.id.downButton);
         doneButton=(FloatingActionButton)findViewById(R.id.doneButton);
@@ -114,7 +114,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
                 chapterPresenter.setSpeechSelected(position);
                 speechListView.setAdapter(chapterPresenter.getSpeeches(view.getContext()));
                 speechListView.setSelection(position);
-                MoveButtons.setVisibility(View.VISIBLE);
+                moveButtons.setVisibility(View.VISIBLE);
                 addSpeech.setVisibility(View.GONE);
                 deleteButton.setVisibility(View.VISIBLE);
                 return true;
@@ -127,7 +127,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
                 chapterPresenter.setSpeechSelected(-1);
                 speechListView.setAdapter(chapterPresenter.getSpeeches(v.getContext()));
                 speechListView.setSelection(speechListView.getCount()-1);
-                MoveButtons.setVisibility(View.GONE);
+                moveButtons.setVisibility(View.GONE);
                 deleteButton.setVisibility(View.GONE);
                 addSpeech.setVisibility(View.VISIBLE);
             }
@@ -155,7 +155,7 @@ public class ListSpeechesActivity extends AppCompatActivity implements ListSpeec
                 chapterPresenter.setSpeechSelected(-1);
                 speechListView.setAdapter(chapterPresenter.getSpeeches(v.getContext()));
                 speechListView.setSelection(speechListView.getCount()-1);
-                MoveButtons.setVisibility(View.GONE);
+                moveButtons.setVisibility(View.GONE);
                 deleteButton.setVisibility(View.GONE);
                 addSpeech.setVisibility(View.VISIBLE);
             }

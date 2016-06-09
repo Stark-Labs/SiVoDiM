@@ -5,6 +5,18 @@ package starklabs.sivodim.Drama.Model.Screenplay;
  */
 public class AudioExport extends ExportAlgorithm {
 
+    private void concatenateSpeeches(){
+
+    }
+
+    private void addSoundtrack(){
+
+    }
+
+    private void finalizeExport(){
+
+    }
+
     @Override
     public void export() {
 

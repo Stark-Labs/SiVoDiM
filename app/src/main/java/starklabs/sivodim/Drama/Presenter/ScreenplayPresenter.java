@@ -79,7 +79,9 @@ public interface ScreenplayPresenter {
     void newScreenplay(String title,Context context);
 
     // check how drag and drop works for orderChapter implementation
-    void orderChapter();
+    void moveUpChapter(String chapterTitle);
+
+    void moveDownChapter(String chapterTitle);
 
     /**
      * Save a screenplay to memory in the default directory, with the title as name and ".scrpl" as extension

@@ -1,18 +1,14 @@
 package starklabs.sivodim.Drama.Model.Screenplay;
 
 import android.content.Context;
-import android.os.Environment;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Vector;
 
 import starklabs.sivodim.Drama.Model.Chapter.Chapter;
 import starklabs.sivodim.Drama.Model.Character.Character;
+import starklabs.sivodim.Drama.Model.Character.CharacterContainer;
 import starklabs.sivodim.Drama.Model.Utilities.XMLParser;
 
 /**
@@ -59,7 +55,7 @@ public class ScreenplayImpl implements Screenplay {
     }
 
     @Override
-    public void export() {
+    public void export(String type) {
 
     }
 
@@ -69,7 +65,7 @@ public class ScreenplayImpl implements Screenplay {
     }
 
     @Override
-    public void share() {
+    public void share(String where) {
 
     }
 
@@ -91,12 +87,15 @@ public class ScreenplayImpl implements Screenplay {
 
     @Override
     public void addCharacter(Character character) {
+        if(characterContainer==null)
+            characterContainer=new CharacterContainer();
         characterContainer.addCharacter(character);
     }
 
     @Override
     public void removeCharacter(Character character){
-        characterContainer.removeCharacter(character);
+        if(characterContainer!=null)
+            characterContainer.removeCharacter(character);
     }
 
     @Override

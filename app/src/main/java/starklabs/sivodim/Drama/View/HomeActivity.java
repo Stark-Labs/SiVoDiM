@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    public File getAlbumStorageDir(String albumName) {
+    /*public File getAlbumStorageDir(String albumName) {
         // Get the directory for the user's public pictures directory.
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), albumName);
@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity
         return file;
     }
 
-    /* Checks if external storage is available to at least read */
+    //Checks if external storage is available to at least read
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state) ||
@@ -99,7 +99,7 @@ public class HomeActivity extends AppCompatActivity
             return true;
         }
         return false;
-    }
+    }*/
 
     @Override
     public void onBackPressed() {

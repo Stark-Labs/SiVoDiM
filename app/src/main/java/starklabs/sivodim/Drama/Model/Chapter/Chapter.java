@@ -66,5 +66,6 @@ public interface Chapter {
 
     void deleteBackground();
     void deleteSoundtrack();
-    void moveSpeech(ListIterator<Speech> iterator);
+    void moveUpSpeech(ListIterator<Speech> iterator);
+    void moveDownSpeech(ListIterator<Speech> iterator);
 }
