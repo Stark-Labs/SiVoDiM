@@ -20,6 +20,8 @@ public class SpeechImpl implements Speech {
     private Character character;
     private SoundFx soundFx;
     private static String synthesistPath;
+    private String audioPath;
+    private boolean audioStatus;
 
     public static class SpeechBuilder {
         // required parameters
@@ -109,6 +111,16 @@ public class SpeechImpl implements Speech {
     @Override
     public void getAudio() {
         //call Libraries
+    }
+
+    @Override
+    public String getAudioPath() {
+        return audioPath;
+    }
+
+    @Override
+    public boolean getAudioStatus() {
+        return audioStatus;
     }
 
 

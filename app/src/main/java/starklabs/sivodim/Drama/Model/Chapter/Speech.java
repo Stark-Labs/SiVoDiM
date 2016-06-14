@@ -60,4 +60,8 @@ public interface Speech extends Serializable {
     Character getCharacter();
 
     void getAudio();
+
+    String getAudioPath();
+
+    boolean getAudioStatus();
 }

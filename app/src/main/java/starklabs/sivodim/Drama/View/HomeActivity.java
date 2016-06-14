@@ -129,8 +129,8 @@ public class HomeActivity extends AppCompatActivity
             toast = Toast.makeText(getApplicationContext(), "Apre l'applicazione di configurazione", Toast.LENGTH_SHORT);
             toast.show();
         } else if (id == R.id.nav_guide) {
-            toast = Toast.makeText(getApplicationContext(), "Apre il manuale utente", Toast.LENGTH_SHORT);
-            toast.show();
+            Intent intent=new Intent(this,UserManualActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_info) {
             toast = Toast.makeText(getApplicationContext(), "Apre info su app e autori", Toast.LENGTH_SHORT);
             toast.show();

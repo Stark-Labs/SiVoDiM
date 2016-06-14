@@ -152,7 +152,7 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 //---- end of test FFmpeg -----------------------------------------------------
                 break;
             case R.id.shareMenu:
-                onShare();
+                //onShare();
                 Toast.makeText(this,"Condividi",Toast.LENGTH_LONG).show();
                 break;
             case R.id.editMenu:
