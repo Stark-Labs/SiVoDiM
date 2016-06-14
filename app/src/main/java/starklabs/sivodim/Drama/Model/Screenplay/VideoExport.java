@@ -15,6 +15,7 @@ public class VideoExport extends ExportAlgorithm {
 
     }
 
+
     private void finalizeExport(){
 
     }

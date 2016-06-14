@@ -30,7 +30,7 @@
             android:scaleType="centerCrop"
             android:layout_marginLeft="-6dp"
             android:layout_alignStart="@id/speechAvatar"
-            />
+            android:id="@+id/avatar_circle" />
 
     </RelativeLayout>
 
