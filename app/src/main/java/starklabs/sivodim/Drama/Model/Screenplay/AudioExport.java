@@ -35,7 +35,7 @@ public class AudioExport extends ExportAlgorithm {
             ListIterator<Speech>speechListIterator=chapter.getSpeechIterator();
             while (speechListIterator.hasNext()){
                 Speech speech=speechListIterator.next();
-                File speechFile=new File(dirPatials,"speech.wav");//new File(speech.getAudioPath());
+                File speechFile=new File(speech.getAudioPath());
                 audioConcatenator.addFile(speechFile);
             }
         }

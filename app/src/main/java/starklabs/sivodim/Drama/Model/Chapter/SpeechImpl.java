@@ -81,6 +81,7 @@ public class SpeechImpl implements Speech {
         emotionID = builder.emotionIDB;
         character = builder.characterB;
         soundFx = builder.soundFxB;
+        audioPath =builder.audioPathB;
     }
 
     // setter methods: edit existing parameters or set new values (text, emotionID, character, soundFx)
