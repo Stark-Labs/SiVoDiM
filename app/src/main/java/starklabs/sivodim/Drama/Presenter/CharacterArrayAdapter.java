@@ -93,7 +93,7 @@ public class CharacterArrayAdapter extends ArrayAdapter {
         if(avatar!=null && avatar.getImage()!=null)
             characterAvatar.setImageBitmap(avatar.getImage());
         else
-            characterAvatar.setImageResource(R.mipmap.undefined_user);
+            characterAvatar.setImageResource(R.drawable.noavatar);
         return row;
     }
 }

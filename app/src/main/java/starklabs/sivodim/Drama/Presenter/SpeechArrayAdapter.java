@@ -38,6 +38,11 @@ public class SpeechArrayAdapter extends ArrayAdapter {
     private ImageView speechAvatar;
 
     /**
+     * The ImageView that will show the emotion of the character who says the speech
+     */
+    private ImageView circleAvatar;
+
+    /**
      * The TextView that will show the name of the character who says the speech
      */
     private TextView characterName;
@@ -103,38 +108,36 @@ public class SpeechArrayAdapter extends ArrayAdapter {
         speechText = (TextView) row.findViewById(R.id.speechText);
         speechAvatar=(ImageView)row.findViewById(R.id.speechAvatar);
         characterName=(TextView)row.findViewById(R.id.characterName);
+        circleAvatar = (ImageView)row.findViewById(R.id.circleAvatar);
         Drawable drawable;
         int color=Color.BLACK;
         switch (speechObj.getEmotion()){
             case "NONE":
-                drawable=speechText.getResources().getDrawable(R.drawable.none);
-                color=Color.BLACK;
+                circleAvatar.setImageResource(R.drawable.no_emotion_circle);
                 break;
             case "FEAR":
-                drawable=speechText.getResources().getDrawable(R.drawable.fear);
-                color=Color.WHITE;
+                circleAvatar.setImageResource(R.drawable.fear_circle);
                 break;
             case "HAPPINESS":
-                drawable=speechText.getResources().getDrawable(R.drawable.happiness);
+                circleAvatar.setImageResource(R.drawable.happyness_circle);
                 break;
             case "ANGER":
-                drawable=speechText.getResources().getDrawable(R.drawable.anger);
+                circleAvatar.setImageResource(R.drawable.anger_circle);
                 break;
             case "SADNESS":
-                drawable=speechText.getResources().getDrawable(R.drawable.sadness);
-                color=Color.WHITE;
+                circleAvatar.setImageResource(R.drawable.sadness_circle);
                 break;
             case "SURPRISE":
-                drawable=speechText.getResources().getDrawable(R.drawable.surprise);
+                circleAvatar.setImageResource(R.drawable.surprise_circle);
                 break;
             case "DISGUST":
-                drawable=speechText.getResources().getDrawable(R.drawable.disgust);
+                circleAvatar.setImageResource(R.drawable.disgust_circle);
                 break;
             default:
-                drawable=speechText.getResources().getDrawable(R.drawable.sadness);
-                color=Color.WHITE;
+                circleAvatar.setImageResource(R.drawable.no_emotion_circle);
                 break;
         }
+        drawable=speechText.getResources().getDrawable(R.drawable.none);
         speechText.setTextColor(color);
         speechText.setBackgroundDrawable(drawable);
         speechText.setText(speechObj.getText());
@@ -145,7 +148,7 @@ public class SpeechArrayAdapter extends ArrayAdapter {
             if(avatar!=null && avatar.getImage()!=null)
                 speechAvatar.setImageBitmap(avatar.getImage());
             else
-                speechAvatar.setImageResource(R.mipmap.undefined_user);
+                speechAvatar.setImageResource(R.drawable.noavatar);
         }
         return row;
     }
