@@ -126,6 +126,10 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 break;
             case R.id.exportMenu:
                 screenplayPresenter.getScreenplay().export("Audio",this);
+                String name=screenplayPresenter.getScreenplayTitle().replace(" ","_");
+                File destination=new File(getFilesDir(),name+".mp3");
+                SpeechSound speechSound=new SpeechSound(destination.getAbsolutePath());
+                speechSound.play();
                 Toast.makeText(this,"Esportazione riuscita",Toast.LENGTH_LONG).show();
                 /*/---- test FFmpeg -----------------------------------------------------------
                 File f=new File(getExternalStorageDirectory(),"pic004.png");
