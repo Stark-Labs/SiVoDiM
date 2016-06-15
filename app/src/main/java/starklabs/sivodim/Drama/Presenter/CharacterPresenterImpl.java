@@ -32,7 +32,7 @@ public class CharacterPresenterImpl implements CharacterPresenter {
 
     public CharacterPresenterImpl(CharacterContainer characterContainer,String projectName){
         this.characterContainer=characterContainer;
-        this.projectName=projectName;
+        this.projectName=projectName.replace(" ","_");
     }
 
     public CharacterPresenterImpl(Character character,String projectName){
@@ -87,7 +87,7 @@ public class CharacterPresenterImpl implements CharacterPresenter {
 
     @Override
     public String getProjectName(){
-        return projectName;
+        return projectName.replace(" ","_");
     }
 
 

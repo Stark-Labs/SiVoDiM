@@ -55,13 +55,24 @@ public class ScreenplayImpl implements Screenplay {
     }
 
     @Override
-    public void export(String type) {
-
+    public void export(String type,Context context) {
+        if(type.equals("Video"))
+            exportAlgorithm=new VideoExport();
+        else
+            exportAlgorithm=new AudioExport();
+        exportAlgorithm.setScreenplay(this);
+        exportAlgorithm.export(context);
     }
 
     @Override
     public String getTitle(){
         return title;
+    }
+
+    @Override
+    public String getPath(Context context) {
+        File file=new File(context.getFilesDir(),getTitle().replace(" ","_"));
+        return file.getAbsolutePath();
     }
 
     @Override

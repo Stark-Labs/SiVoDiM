@@ -125,7 +125,9 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 Toast.makeText(this,"Salvato",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportMenu:
-                //---- test FFmpeg -----------------------------------------------------------
+                screenplayPresenter.getScreenplay().export("Audio",this);
+                Toast.makeText(this,"Esportazione riuscita",Toast.LENGTH_LONG).show();
+                /*/---- test FFmpeg -----------------------------------------------------------
                 File f=new File(getExternalStorageDirectory(),"pic004.png");
                 System.out.println(f.getAbsolutePath());
                 File file=new File(getFilesDir(),"track.mp3");
@@ -149,10 +151,10 @@ public class ListChapterActivity extends AppCompatActivity implements ListChapte
                 SpeechSound soundtrack=new SpeechSound(dest3.getAbsolutePath());
                 soundtrack.play();
                 Toast.makeText(this,"Esportazione riuscita",Toast.LENGTH_LONG).show();
-                //---- end of test FFmpeg -----------------------------------------------------
+                //---- end of test FFmpeg -----------------------------------------------------*/
                 break;
             case R.id.shareMenu:
-                onShare();
+                //onShare();
                 Toast.makeText(this,"Condividi",Toast.LENGTH_LONG).show();
                 break;
             case R.id.editMenu:

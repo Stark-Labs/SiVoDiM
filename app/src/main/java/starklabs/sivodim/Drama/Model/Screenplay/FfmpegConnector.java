@@ -57,22 +57,22 @@ public abstract class FfmpegConnector {
 
             @Override
             public void onProgress(String message) {
-
+                System.out.println(message);
             }
 
             @Override
             public void onFailure(String message) {
-
+                System.out.println(message);
             }
 
             @Override
             public void onStart() {
-
+                System.out.println("START OPERATION");
             }
 
             @Override
             public void onFinish() {
-
+                System.out.println("END OPERATION");
             }
         });
         while (!ffmpeg.isFFmpegCommandRunning()){
