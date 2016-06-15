@@ -112,6 +112,7 @@ public class XMLParser {
                         String emotion = speechElem.getAttribute("emotion");
                         String soundFxPath = speechElem.getAttribute("soundFx");
                         SoundFx soundFx = new SoundFx(soundFxPath);
+                        String audioPath = speechElem.getAttribute("audioPath");
 
                         Character character = parsedData.getCharacterByName(characterName);
 
@@ -119,9 +120,11 @@ public class XMLParser {
                                 .setText(text)
                                 .setEmotion(emotion)
                                 .setSoundFX(soundFx)
+                                .setAudioPath(audioPath)
                                 .build();
 
                         if (character != null) speech.setCharacter(character);
+                        if (audioPath != null) speech.setAudioStatus(true);
 
                         vDebug("SPEECH: "+speech.getText());
                         chapter.addSpeech(speech);
@@ -245,6 +248,7 @@ public class XMLParser {
                         Element speechElem = doc.createElement("speech");
                         speechElem.setAttribute("character", speech.getCharacter().getName());
                         speechElem.setAttribute("emotion", speech.getEmotion());
+                            speechElem.setAttribute("audioPath", speech.getAudioPath());
                         speechElem.setTextContent(speech.getText());
 
                         // debug
@@ -263,7 +267,6 @@ public class XMLParser {
                     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                     transformer.setOutputProperty(OutputKeys.METHOD, "xml");
                     transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-                    //transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "roles.dtd");
                     transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 

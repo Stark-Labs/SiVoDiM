@@ -19,7 +19,6 @@ public class SpeechImpl implements Speech {
     private String emotionID;
     private Character character;
     private SoundFx soundFx;
-    private static String synthesistPath;
     private String audioPath;
     private boolean audioStatus;
 
@@ -31,6 +30,8 @@ public class SpeechImpl implements Speech {
         private String emotionIDB;
         private Character characterB;
         private SoundFx soundFxB;
+        private String audioPathB;
+        private boolean audioStatusB;
 
         // setter
         public SpeechBuilder setText(String text) {
@@ -50,6 +51,16 @@ public class SpeechImpl implements Speech {
 
         public SpeechBuilder setSoundFX(SoundFx soundFx) {
             this.soundFxB = soundFx;
+            return this;
+        }
+
+        public SpeechBuilder setAudioPath(String audioPath) {
+            this.audioPathB = audioPath;
+            return this;
+        }
+
+        public SpeechBuilder setAudioStatus(boolean audioStatus) {
+            this.audioStatusB = audioStatus;
             return this;
         }
 
@@ -89,8 +100,16 @@ public class SpeechImpl implements Speech {
     }
 
     @Override
-    public void setSoundFx(SoundFx soundFx) {
-        this.soundFx = soundFx;
+    public void setSoundFx(SoundFx soundFx) { this.soundFx = soundFx; }
+
+    @Override
+    public void setAudioPath(String audioPath) {
+        this.audioPath = audioPath;
+    }
+
+    @Override
+    public void setAudioStatus(boolean audioStatus) {
+        this.audioStatus = audioStatus;
     }
 
 

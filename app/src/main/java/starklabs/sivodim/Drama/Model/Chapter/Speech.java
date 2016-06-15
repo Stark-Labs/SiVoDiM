@@ -38,6 +38,18 @@ public interface Speech extends Serializable {
      */
     void setSoundFx(SoundFx soundFx);
 
+    /**
+     * Sets the {@link String} for the speech
+     * @param audioPath
+     */
+    void setAudioPath(String audioPath);
+
+    /**
+     * Sets the {@link boolean} for the speech
+     * @param audioStatus
+     */
+    void setAudioStatus(boolean audioStatus);
+
 
     // ----------------------------- GETTER ----------------------------------------------
 
