@@ -22,5 +22,6 @@ public interface Screenplay {
     Iterator<Chapter> getChapterIterator();
     Character getCharacterByName(String name);
     String getTitle();
+    String getPath(Context context);
     Chapter getChapter(String title);
 }

@@ -17,20 +17,25 @@ import starklabs.sivodim.Drama.Model.Chapter.Speech;
 public class AudioExport extends ExportAlgorithm {
 
     private void concatenateSpeeches(Context context){
-        File dir=new File(context.getFilesDir(),screenplay.getTitle());
+        File dir=new File(screenplay.getPath(context));
         if(!dir.exists()){
             dir.mkdir();
         }
-        File destination=new File(dir,"speeches.wav");
-        AudioConcatenator audioConcatenator=new AudioConcatenator(context,destination);
         File dirPatials=new File(dir,"Partials");
+        if(!dirPatials.exists()){
+            dirPatials.mkdir();
+        }
+        String name=screenplay.getTitle().replace(" ","_");
+        File destination=new File(context.getFilesDir(),"concatenation"+name+".wav");
+        AudioConcatenator audioConcatenator=new AudioConcatenator(context,destination);
+        audioConcatenator.setDestination(destination);
         Iterator<Chapter>chapterIterator= screenplay.getChapterIterator();
         while (chapterIterator.hasNext()){
             Chapter chapter=chapterIterator.next();
             ListIterator<Speech>speechListIterator=chapter.getSpeechIterator();
             while (speechListIterator.hasNext()){
                 Speech speech=speechListIterator.next();
-                File speechFile=new File(dirPatials,speech.getAudioPath());
+                File speechFile=new File(dirPatials,"speech.wav");//new File(speech.getAudioPath());
                 audioConcatenator.addFile(speechFile);
             }
         }
@@ -45,12 +50,21 @@ public class AudioExport extends ExportAlgorithm {
 
     }
 
-    private void finalizeExport(){
-
+    private void finalizeExport(Context context){
+        String name=screenplay.getTitle().replace(" ","_");
+        File file=new File(context.getFilesDir(),"concatenation"+name+".wav");
+        File destination=new File(context.getFilesDir(),name+".mp3");
+        Mp3Converter mp3Converter=new Mp3Converter(context,file,destination);
+        try {
+            mp3Converter.exec();
+        } catch (FFmpegCommandAlreadyRunningException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void export(Context context) {
-
+        concatenateSpeeches(context);
+        finalizeExport(context);
     }
 }

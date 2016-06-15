@@ -70,6 +70,12 @@ public class ScreenplayImpl implements Screenplay {
     }
 
     @Override
+    public String getPath(Context context) {
+        File file=new File(context.getFilesDir(),getTitle().replace(" ","_"));
+        return file.getAbsolutePath();
+    }
+
+    @Override
     public void share(String where) {
 
     }
