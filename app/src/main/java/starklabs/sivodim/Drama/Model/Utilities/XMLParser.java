@@ -112,7 +112,7 @@ public class XMLParser {
                         String emotion = speechElem.getAttribute("emotion");
                         String soundFxPath = speechElem.getAttribute("soundFx");
                         SoundFx soundFx = new SoundFx(soundFxPath);
-                        String audioPath = speechElem.getAttribute("synthesizedPath");
+                        String audioPath = speechElem.getAttribute("audioPath");
 
                         Character character = parsedData.getCharacterByName(characterName);
 
